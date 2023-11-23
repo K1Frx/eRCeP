@@ -1,0 +1,50 @@
+# Virtual environments
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.vscode/
+.idea/
+
+# Database
+*.sqlite3
+
+# Compiled Python files
+*.pyc
+
+# Compiled C extension
+*.so
+
+# Logs
+*.log
+
+# Local settings
+backend/local_settings.py
+
+# Media files
+backend/media/
+
+# Static files
+backend/static/
+
+# Environment variables
+.env
+
+# Dependency management
+node_modules/
+yarn-error.log
+
+# Django
+*.pyc
+*.pyo
+__pycache__/
+*.pyc
+*.pyo
+
+# Ignore migrations
+**/migrations/*.py
+**/migrations/*.pyc
