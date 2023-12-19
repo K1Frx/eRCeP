@@ -1,6 +1,6 @@
-from genericapi import GenericCRUDAPIView
-from models import Worker, Employer, Contract, Absence, AbsenceType, Worktime
-from serializers import *
+from ercep.api.genericapi import GenericCRUDAPIView
+from ercep.models import Worker, Employer, Contract, Absence, AbsenceType, Worktime
+from ercep.api.serializers import *
 
 class WorkerAPIView(GenericCRUDAPIView):
     model = Worker

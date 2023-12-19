@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from models import Worker, Employer, Contract, Absence, AbsenceType, Worktime
+from ercep.models import Worker, Employer, Contract, Absence, AbsenceType, Worktime
 
 # Generic serializers
 class GenericPaginationResponseSerializer(serializers.Serializer):
@@ -9,7 +9,7 @@ class GenericPaginationResponseSerializer(serializers.Serializer):
     num_pages = serializers.IntegerField()
     offset = serializers.IntegerField()
     
-class GenericPaginationRequestSerializer(serializers.Serialize):
+class GenericPaginationRequestSerializer(serializers.Serializer):
     page = serializers.IntegerField(required=False)
     per_page = serializers.IntegerField(required=False)
     

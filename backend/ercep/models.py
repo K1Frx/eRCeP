@@ -22,6 +22,7 @@ class Worker(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
     
+
 class Employer(models.Model):
     name = models.CharField(max_length=50, null=False, unique=True, blank=False)
     nip = models.CharField(max_length=10, null=False, unique=True, blank=False)

@@ -1,4 +1,5 @@
 from rest_framework.views import APIView, Response, status
+from django.contrib.auth.models import User
 
 class GenericPaginationAPIView(APIView):
 
@@ -38,15 +39,31 @@ class GenericPaginationAPIView(APIView):
             "offset": index_start,
             "items": queryset[index_start:index_finish]
         }
+    
+    class Meta:
+        abstract = True
         
 class GenericCRUDAPIView(GenericPaginationAPIView):
     
+    def get_queryset_by_permissions(user:User, queryset=None, model=None):
+        if not queryset:
+            queryset = model.objects.all()
+            
+        if user.is_superuser:
+            queryset.annotate(view=True)
+            queryset.annotate(change=True)
+            return queryset
+        
+        queryset.annotate(view=True) if user.has_perm('ercep.view_worker') else queryset.annotate(view=False)
+        queryset.annotate(change=True) if user.has_perm('ercep.change_worker') else queryset.annotate(change=False)
+        
     def get(self, request):
         try:
             serializer = self.request_serializer_get(data=request.query_params)
             if serializer.is_valid():
                 filters = serializer.validated_data
                 data = self.model.objects.filter(**filters)
+                data = self.get_queryset_by_permissions(request.user, data, self.model).filter(view=True)
                 data = self.paginate(data, filters.get('page', None), filters.get('per_page', None))
                 response = self.response_serializer_get(data)
                 return Response(response.data, status=status.HTTP_200_OK)
@@ -58,6 +75,8 @@ class GenericCRUDAPIView(GenericPaginationAPIView):
         try:
             serializer = self.request_serializer_post(data=request.data)
             if serializer.is_valid():
+                if (not request.user.is_superuser) and (not request.user.has_perm('ercep.change_worker')):
+                    return Response("You don't have permission to create new objects", status=status.HTTP_403_FORBIDDEN)
                 serializer.save()
                 obj = self.model.objects.get(pk=serializer.data['id'])
                 data = self.paginate(obj, 1, 1)
@@ -76,6 +95,8 @@ class GenericCRUDAPIView(GenericPaginationAPIView):
         try:
             serializer = self.request_serializer_patch(obj, data=request.data)
             if serializer.is_valid():
+                if (not request.user.is_superuser) and (not request.user.has_perm('ercep.change_worker')):
+                    return Response("You don't have permission to change objects", status=status.HTTP_403_FORBIDDEN)
                 serializer.save()
                 obj = self.model.objects.get(pk=pk)
                 data = self.paginate(obj, 1, 1)
@@ -93,6 +114,8 @@ class GenericCRUDAPIView(GenericPaginationAPIView):
             return Response(f"{self.model.__class__.__name__} not found", status=status.HTTP_404_NOT_FOUND)
 
         try:
+            if (not request.user.is_superuser) and (not request.user.has_perm('ercep.change_worker')):
+                    return Response("You don't have permission to delete objects", status=status.HTTP_403_FORBIDDEN)
             obj.delete()
             return Response(f"{self.model.__class__.__name__} deleted succesfully", status=status.HTTP_204_NO_CONTENT)
         except Exception as e:
