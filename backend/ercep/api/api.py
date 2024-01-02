@@ -1,7 +1,14 @@
 from ercep.api.genericapi import GenericCRUDAPIView
 from ercep.models import Worker, Employer, Contract, Absence, AbsenceType, Worktime
 from ercep.api.serializers import *
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.response import Response
 
+class CustomAuthToken(TokenObtainPairView):
+    def post(self, request, *args, **kwargs):
+        response = super().post(request, *args, **kwargs)
+        return Response({'token': response.data['access']})
+    
 class WorkerAPIView(GenericCRUDAPIView):
     model = Worker
     
