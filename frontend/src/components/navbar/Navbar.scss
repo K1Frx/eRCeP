@@ -35,7 +35,7 @@
     // display: flex;
     // align-items: center;
     color: #fff;
-    padding: 1.3rem 2rem;
+    padding: 1.4rem 2rem;
     position: fixed;
     top: 0;
     right: 0;
@@ -45,7 +45,7 @@
 
   .nav-menu {
     display: grid;
-    grid-template-rows: repeat(5, auto);
+    grid-template-rows: repeat(6, auto);
     grid-gap: 0.1rem;
     width: 100%;
   }
@@ -68,6 +68,15 @@
   .nav-links:hover {
     border-bottom: 0.1rem solid #fff;
     transition: all 0.2s ease-out;
+    color: #fff;
+  }
+
+  .bottom-buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: auto;
+    padding: 1rem;
     color: #fff;
   }
 

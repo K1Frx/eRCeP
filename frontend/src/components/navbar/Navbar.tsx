@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
+import { faGear } from "@fortawesome/free-solid-svg-icons/faGear";
+import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket";
 
 function Navbar() {
   const [click, setClick] = useState(false);
@@ -45,7 +47,6 @@ function Navbar() {
             Workers
           </Link>
         </div>
-        {window.innerWidth > 960 &&
           <>
             <div className="nav-item">
               <Link
@@ -57,8 +58,6 @@ function Navbar() {
               </Link>
             </div>
           </>
-        }
-
         <div className="nav-item">
           <Link
             to="/admin"
@@ -77,6 +76,21 @@ function Navbar() {
             About
           </Link>
         </div>
+        <div className="bottom-buttons">
+        <Link
+            to="/settings"
+            className="nav-links"
+            onClick={closeMobileMenu}
+          >
+            <FontAwesomeIcon icon={faGear} />
+          </Link>
+          <button
+            className="nav-links"
+            onClick={() => {alert("You have been logged out.")}}
+          >
+            <FontAwesomeIcon icon={faRightFromBracket} />
+          </button>
+          </div>
       </div>
     </nav>
   );
