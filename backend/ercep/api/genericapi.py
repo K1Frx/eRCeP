@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.db import transaction
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.db.models import Value, BooleanField
+from django.db.models import Q
 
 class GenericPaginationAPIView(APIView):
 
@@ -55,17 +57,18 @@ class GenericCRUDAPIView(GenericPaginationAPIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
     
-    def get_queryset_by_permissions(user:User, queryset=None, model=None):
+    def get_queryset_by_permissions(self, user:User, queryset=None, model=None):
         if not queryset:
             queryset = model.objects.all()
             
         if user.is_superuser:
-            queryset.annotate(view=True)
-            queryset.annotate(change=True)
+            queryset = queryset.annotate(view=Value(True, output_field=BooleanField()))
+            queryset = queryset.annotate(change=Value(True, output_field=BooleanField()))
+
             return queryset
         
-        queryset.annotate(view=True) if user.has_perm('ercep.view_worker') else queryset.annotate(view=False)
-        queryset.annotate(change=True) if user.has_perm('ercep.change_worker') else queryset.annotate(change=False)
+        queryset = queryset.annotate(view=Value(True, output_field=BooleanField())) if user.has_perm('ercep.view_worker') else queryset.annotate(view=False)
+        queryset = queryset.annotate(change=Value(True, output_field=BooleanField())) if user.has_perm('ercep.change_worker') else queryset.annotate(change=False)
         
         return queryset
     
@@ -74,7 +77,11 @@ class GenericCRUDAPIView(GenericPaginationAPIView):
             serializer = self.request_serializer_get(data=request.query_params)
             if serializer.is_valid():
                 filters = serializer.validated_data
-                data = self.model.objects.filter(**filters)
+                query_filters = Q()
+                for key, value in filters.items():
+                    lookup = f"{key}__in" if isinstance(value, list) else key
+                    query_filters &= Q(**{lookup: value})
+                data = self.model.objects.filter(query_filters)
                 data = self.get_queryset_by_permissions(request.user, data, self.model).filter(view=True)
                 data = self.paginate(data, filters.get('page', None), filters.get('per_page', None))
                 response = self.response_serializer_get(data)

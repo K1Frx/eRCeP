@@ -10,6 +10,7 @@ class GenericPaginationResponseSerializer(serializers.Serializer):
     offset = serializers.IntegerField()
     
 class GenericPaginationRequestSerializer(serializers.Serializer):
+    id = serializers.ListField(child=serializers.IntegerField(), required=False)
     page = serializers.IntegerField(required=False)
     per_page = serializers.IntegerField(required=False)
     
@@ -27,7 +28,11 @@ class WorkerPostRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class WorkerPatchRequestSerializer(WorkerPostRequestSerializer):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = False
 
 class WorkerResponseSerializer(GenericPaginationResponseSerializer):
     items = WorkerPostRequestSerializer(many=True)
@@ -44,7 +49,11 @@ class EmployerPostRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class EmployerPatchRequestSerializer(EmployerPostRequestSerializer):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = False
 
 class EmployerResponseSerializer(GenericPaginationResponseSerializer):
     items = EmployerPostRequestSerializer(many=True)
@@ -62,7 +71,11 @@ class ContractPostRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ContractPatchRequestSerializer(ContractPostRequestSerializer):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = False
 
 class ContractResponseSerializer(GenericPaginationResponseSerializer):
     items = ContractPostRequestSerializer(many=True)
@@ -81,7 +94,11 @@ class AbsencePostRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class AbsencePatchRequestSerializer(AbsencePostRequestSerializer):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = False
 
 class AbsenceResponseSerializer(GenericPaginationResponseSerializer):
     items = AbsencePostRequestSerializer(many=True)
@@ -97,7 +114,11 @@ class AbsenceTypePostRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class AbsenceTypePatchRequestSerializer(AbsenceTypePostRequestSerializer):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = False
 
 class AbsenceTypeResponseSerializer(GenericPaginationResponseSerializer):
     items = AbsenceTypePostRequestSerializer(many=True)
@@ -117,7 +138,11 @@ class WorktimePostRequestSerializer(serializers.ModelSerializer):
         fields = '__all__'
         
 class WorktimePatchRequestSerializer(WorktimePostRequestSerializer):
-    pass
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        for field_name, field in self.fields.items():
+            field.required = False
 
 class WorktimeResponseSerializer(GenericPaginationResponseSerializer):
     items = WorktimePostRequestSerializer(many=True)
