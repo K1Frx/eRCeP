@@ -1,8 +1,8 @@
-import { useState } from 'react'
 import Container from 'react-bootstrap/esm/Container';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import Navbar from './components/navbar/Navbar'
 import LandingPage from './pages/landingPage/landingPage';
+import './index.scss';
 
 function App() {
 
@@ -10,6 +10,7 @@ function App() {
     <Container fluid="true">
       <Router>
           <Navbar />
+          <div className="main-container">
           <Routes>
             <Route path="/" Component={LandingPage} />
             {/* <Route path='/404' Component={NotFound} /> */}
@@ -19,6 +20,7 @@ function App() {
             />
           </Routes>
           {/* <Footer /> */}
+          </div>
       </Router>
     </Container>
   )
