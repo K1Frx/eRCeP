@@ -47,17 +47,17 @@ function Navbar() {
             Workers
           </Link>
         </div>
-          <>
-            <div className="nav-item">
-              <Link
-                to="/employers"
-                className="nav-links"
-                onClick={closeMobileMenu}
-              >
-                Employers
-              </Link>
-            </div>
-          </>
+        <>
+          <div className="nav-item">
+            <Link
+              to="/employers"
+              className="nav-links"
+              onClick={closeMobileMenu}
+            >
+              Employers
+            </Link>
+          </div>
+        </>
         <div className="nav-item">
           <Link
             to="/admin"
@@ -76,21 +76,23 @@ function Navbar() {
             About
           </Link>
         </div>
-        <div className="bottom-buttons">
-        <Link
-            to="/settings"
-            className="nav-links"
-            onClick={closeMobileMenu}
-          >
-            <FontAwesomeIcon icon={faGear} />
-          </Link>
-          <button
-            className="nav-links"
-            onClick={() => {alert("You have been logged out.")}}
-          >
-            <FontAwesomeIcon icon={faRightFromBracket} />
-          </button>
+        <div className="nav-item">
+          <div className="bottom-buttons">
+            <Link
+              to="/settings"
+              className="nav-links"
+              onClick={closeMobileMenu}
+            >
+              <FontAwesomeIcon icon={faGear} />
+            </Link>
+            <button
+              className="nav-links"
+              onClick={() => { alert("You have been logged out.") }}
+            >
+              <FontAwesomeIcon icon={faRightFromBracket} />
+            </button>
           </div>
+        </div>
       </div>
     </nav>
   );
