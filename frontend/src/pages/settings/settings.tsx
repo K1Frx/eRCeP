@@ -1,5 +1,6 @@
 import "./settings.scss";
 import ThemeSwitch from "../../components/themeSwitch/themeSwitch";
+import LanguageSwitch from "../../components/languageSwitch/languageSwitch";
 
 const Settings = () => {
     // const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
@@ -8,6 +9,7 @@ const Settings = () => {
     return (
         <div className="settingsContainer">
             <ThemeSwitch />
+            <LanguageSwitch />
         </div>
     );
 };

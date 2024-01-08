@@ -1,9 +1,19 @@
+@use "../../assets/consts";
+
 .settingsContainer {
-    width: var(--width);
-    height: var(--width);
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    
+    gap: 2rem;
+    margin: 2rem;
+
+    button {
+        min-width: 17rem;
+    }
+
+    @media screen and (max-width: consts.$mobile-width) {
+        justify-content: center;
+        align-items: center;
+    }
 }

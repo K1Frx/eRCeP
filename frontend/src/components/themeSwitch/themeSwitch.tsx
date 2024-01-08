@@ -51,9 +51,8 @@ export default function ThemeSwitch() {
     return (
         <div className='themeSwitchContainer'>
         <button onClick={toggleTheme} className="themeSwitch">
-            {theme === "light" ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />}
+            {theme === "light" ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />} Change Theme
         </button>
-        Change Theme
         </div>
     )
 }

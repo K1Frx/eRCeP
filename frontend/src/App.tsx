@@ -29,8 +29,8 @@ function App() {
     <Container fluid="true" className="main-container">
       <Router>
         <AppContext.Provider value={{ loggedIn, setLoggedIn, loading, setLoading }}>
-          <Navbar />
-          <Header/>
+          <div className='navbar'><Navbar /></div>
+          <div className='header'><Header/></div>
           <div className="pageContainer">
           <Routes>
             <Route path="/" Component={LandingPage} />
