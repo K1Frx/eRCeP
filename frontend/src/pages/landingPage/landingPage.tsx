@@ -1,11 +1,16 @@
-import Header from "../../components/header/header";
+import { useContext } from "react";
+import { AppContext } from "../../App";
+import LoginButton from "../../components/loginButton/loginButton";
 import "./LandingPage.scss";
 
 const LandingPage = () => {
+    const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
+
+    if (!loggedIn) return <LoginButton />;
+    
     return (
         <div className="landingPageContainer">
-           <Header title={"Welcome"}/>
-           <h1 className="title">Home Page</h1>
+           <h1 className="title"><LoginButton/></h1>
         </div>
     );
 };

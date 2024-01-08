@@ -1,0 +1,19 @@
+@use "../../assets/consts";
+
+.loginButton {
+    font-size: 2rem;
+    font-weight: 500;
+    background: var(--black-primary);
+    color: #fff;
+    padding: 0.5rem 2rem;
+    border-radius: 2rem;
+    min-width: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        scale: 1.1;
+    }
+}

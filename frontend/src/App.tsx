@@ -10,14 +10,27 @@ import Admin from './pages/admin/admin';
 import Settings from './pages/settings/settings';
 import Timesheets from './pages/timesheets/timesheets';
 import Employers from './pages/employers/employers';
+import { createContext, useState } from 'react';
+import Header from './components/header/Header';
+
+export const AppContext = createContext<{
+  loggedIn: boolean,
+  setLoggedIn: (React.Dispatch<React.SetStateAction<boolean>> | Function),
+  loading: boolean,
+  setLoading: (React.Dispatch<React.SetStateAction<boolean>> | Function),
+}>({ loggedIn: false, setLoggedIn: () => { }, loading: false, setLoading: () => { } });
+
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
 
   return (
-    <Container fluid="true">
+    <Container fluid="true" className="main-container">
       <Router>
+        <AppContext.Provider value={{ loggedIn, setLoggedIn, loading, setLoading }}>
           <Navbar />
-          <div className="main-container">
+          <Header/>
           <Routes>
             <Route path="/" Component={LandingPage} />
             <Route path="/about" Component={About} />
@@ -33,7 +46,7 @@ function App() {
             />
           </Routes>
           {/* <Footer /> */}
-          </div>
+        </AppContext.Provider>
       </Router>
     </Container>
   )

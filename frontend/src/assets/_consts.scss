@@ -3,7 +3,21 @@ $mobile-width: 720px;
 :root {
     --navbar-width: 15rem;
     --width: calc(100% - var(--navbar-width));
+    --black-primary: rgb(28, 27, 27);
+    --black-secondary: #242222;
+    --black-hover: #242424;
+    --white-primary: #fff;
+}
 
+html[data-theme="light"] {
+    --black-primary: rgb(28, 27, 27);
+    --black-secondary: #242222;
+    --black-hover: #242424;
+    --white-primary: #fff;
+}
+
+//dark theme
+html[data-theme="dark"] {
     --black-primary: rgb(28, 27, 27);
     --black-secondary: #242222;
     --black-hover: #242424;

@@ -1,10 +1,14 @@
-import Header from "../../components/header/header";
+import { useContext } from "react";
+import { AppContext } from "../../App";
+import LoginButton from "../../components/loginButton/loginButton";
 import "./admin.scss";
 
 const Admin = () => {
+    const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
+
+    if (!loggedIn) return <LoginButton />;
     return (
         <div className="adminContainer">
-           <Header title={"Welcome"}/>
            <h1 className="title">Admin</h1>
         </div>
     );

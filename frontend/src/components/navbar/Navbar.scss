@@ -80,6 +80,16 @@
     color: #fff;
   }
 
+  button:disabled,
+  button[disabled]{
+    opacity: 0.5;
+    color: #666666;
+    &:hover {
+      color: #666666;
+      border: none;
+    }
+  }
+
   /*mobile*/
   @media screen and (max-width: consts.$mobile-width) {
     width: 100%;

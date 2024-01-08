@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,8 +7,11 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons/faXmark";
 import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
 import { faGear } from "@fortawesome/free-solid-svg-icons/faGear";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket";
+import { AppContext } from "../../App";
 
 function Navbar() {
+  const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
+
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
@@ -86,7 +89,8 @@ function Navbar() {
               <FontAwesomeIcon icon={faGear} />
             </Link>
             <button
-              className="nav-links"
+              disabled={!loggedIn}
+              className="nav-links logout-button"
               onClick={() => { alert("You have been logged out.") }}
             >
               <FontAwesomeIcon icon={faRightFromBracket} />

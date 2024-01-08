@@ -1,10 +1,14 @@
-import Header from "../../components/header/header";
+import { useContext } from "react";
+import { AppContext } from "../../App";
+import LoginButton from "../../components/loginButton/loginButton";
 import "./employers.scss";
 
 const Employers = () => {
+    const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
+
+    if (!loggedIn) return <LoginButton />;
     return (
         <div className="employersContainer">
-           <Header title={"Employers"}/>
            <h1 className="title">Employers</h1>
         </div>
     );
