@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './themeSwitch.scss'
 
-export default function DarkMode() {
+export default function ThemeSwitch() {
 
     const [theme, setTheme] = useState<string>((localStorage.getItem("themeKey") ?? document.documentElement.getAttribute('data-theme')) ?? 'light');
 
@@ -48,9 +49,11 @@ export default function DarkMode() {
     }, []);
 
     return (
-        theme === "light" ?
-            <button onClick={toggleTheme} className="themeSwitch"><FontAwesomeIcon icon={faMoon} /></button>
-            :
-            <button onClick={toggleTheme} className="themeSwitch"><FontAwesomeIcon icon={faSun} /></button>
+        <div className='themeSwitchContainer'>
+        <button onClick={toggleTheme} className="themeSwitch">
+            {theme === "light" ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />}
+        </button>
+        Change Theme
+        </div>
     )
 }

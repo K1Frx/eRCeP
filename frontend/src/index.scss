@@ -3,6 +3,7 @@
 * {
   box-sizing: border-box;
   font-family: 'Urbane';
+  margin: 0;
 }
 
 .container-fluid {
@@ -17,14 +18,50 @@ a {
 }
 
 .main-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: var(--navbar-width);
+  background-color: var(--background-primary);
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  /* 15rem for the navbar, 1fr for the rest of the content */
+  grid-template-rows: 4rem 1fr;
+  /* 5rem for the header, 1fr for the rest of the content */
+  // margin-left: var(--navbar-width);
   height: 100vh;
+
+  .app-container {
+    grid-template-columns: 15rem 1fr; /* 15rem for the navbar, 1fr for the rest of the content */
+    grid-template-rows: 5rem 1fr; /* 5rem for header, 1fr for content */
+  }
+
+  .navbar {
+    grid-column: 1; /* Occupy the first column */
+    grid-row: 1 / span 2; /* Span across both rows in the first column */
+  }
+
+  .pageContainer {
+    grid-column: 2; /* Occupy the second column */
+    grid-row: 2; /* Occupy the second row */
+  }
+
   @media screen and (max-width: consts.$mobile-width) {
-    margin-left: 0rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 4rem 4rem 1fr;
+
+    .header {
+      grid-row: 1; /* Occupy the first row */
+    }
+    
+    .navbar {
+      grid-row: 2; /* Occupy the second row */
+    }
+  
+    .pageContainer {
+      grid-row: 3; /* Occupy the third row */
+      grid-column: 1; /* Occupy the first column */
+    }
   }
 }
 

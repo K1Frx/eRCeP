@@ -1,0 +1,24 @@
+.themeSwitchContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    color: var(--black-primary);
+    font-size: 2rem;
+
+    .themeSwitch {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--black-primary);
+        color: var(--white-primary);
+        padding: 1rem;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+}

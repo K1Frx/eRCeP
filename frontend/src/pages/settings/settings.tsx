@@ -1,15 +1,13 @@
-import { useContext } from "react";
-import { AppContext } from "../../App";
-import LoginButton from "../../components/loginButton/loginButton";
 import "./settings.scss";
+import ThemeSwitch from "../../components/themeSwitch/themeSwitch";
 
 const Settings = () => {
-    const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
+    // const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
 
-    if (!loggedIn) return <LoginButton />;
+    // if (!loggedIn) return <LoginButton />;
     return (
         <div className="settingsContainer">
-           <h1 className="title">Settings</h1>
+            <ThemeSwitch />
         </div>
     );
 };

@@ -7,6 +7,7 @@ $mobile-width: 720px;
     --black-secondary: #242222;
     --black-hover: #242424;
     --white-primary: #fff;
+    --background-primary: #fff;
 }
 
 html[data-theme="light"] {
@@ -14,12 +15,14 @@ html[data-theme="light"] {
     --black-secondary: #242222;
     --black-hover: #242424;
     --white-primary: #fff;
+    --background-primary: #fff;
 }
 
 //dark theme
 html[data-theme="dark"] {
     --black-primary: rgb(28, 27, 27);
-    --black-secondary: #242222;
+    --black-secondary: #424242;
     --black-hover: #242424;
     --white-primary: #fff;
+    --background-primary: #494949;
 }

@@ -1,8 +1,9 @@
 .settingsContainer {
-    .title {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+    width: var(--width);
+    height: var(--width);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    
 }

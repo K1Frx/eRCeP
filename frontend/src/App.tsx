@@ -31,6 +31,7 @@ function App() {
         <AppContext.Provider value={{ loggedIn, setLoggedIn, loading, setLoading }}>
           <Navbar />
           <Header/>
+          <div className="pageContainer">
           <Routes>
             <Route path="/" Component={LandingPage} />
             <Route path="/about" Component={About} />
@@ -45,6 +46,7 @@ function App() {
               element={<Navigate to="/404" replace />}
             />
           </Routes>
+          </div>
           {/* <Footer /> */}
         </AppContext.Provider>
       </Router>
