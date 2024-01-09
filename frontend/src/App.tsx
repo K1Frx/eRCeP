@@ -12,6 +12,7 @@ import Timesheets from './pages/timesheets/timesheets';
 import Employers from './pages/employers/employers';
 import { createContext, useState } from 'react';
 import Header from './components/header/Header';
+import { Loader } from './components/loader/Loader';
 
 export const AppContext = createContext<{
   loggedIn: boolean,
@@ -30,22 +31,23 @@ function App() {
       <Router>
         <AppContext.Provider value={{ loggedIn, setLoggedIn, loading, setLoading }}>
           <div className='navbar'><Navbar /></div>
-          <div className='header'><Header/></div>
+          <div className='header'><Header /></div>
           <div className="pageContainer">
-          <Routes>
-            <Route path="/" Component={LandingPage} />
-            <Route path="/about" Component={About} />
-            <Route path="/admin" Component={Admin} />
-            <Route path="/employers" Component={Employers} />
-            <Route path="/settings" Component={Settings} />
-            <Route path="/timesheets" Component={Timesheets} />
-            <Route path="/workers" Component={Workers} />
-            <Route path="/404" Component={NotFound} />
-            <Route
-              path="*"
-              element={<Navigate to="/404" replace />}
-            />
-          </Routes>
+            {loading && <Loader />}
+            <Routes>
+              <Route path="/" Component={LandingPage} />
+              <Route path="/about" Component={About} />
+              <Route path="/admin" Component={Admin} />
+              <Route path="/employers" Component={Employers} />
+              <Route path="/settings" Component={Settings} />
+              <Route path="/timesheets" Component={Timesheets} />
+              <Route path="/workers" Component={Workers} />
+              <Route path="/404" Component={NotFound} />
+              <Route
+                path="*"
+                element={<Navigate to="/404" replace />}
+              />
+            </Routes>
           </div>
           {/* <Footer /> */}
         </AppContext.Provider>
