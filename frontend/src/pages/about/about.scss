@@ -1,8 +1,33 @@
+@use "../../assets/consts";
+
 .aboutContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 2rem;
+    margin: 1rem;
     .title {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        position: relative;
+        &::after {
+            position: absolute;
+            left: -100%;
+            display: block;
+            content: '';
+            width: 300%;
+            margin: 10px auto;
+            border-top: 0.1rem solid var(--black-primary);
+         }
+
+    }
+
+    .aboutText {
+        width: 70%;
+        text-align: justify;
+        text-indent: 2rem;
+        @media screen and (max-width: consts.$mobile-width) {
+            width: 100%;
+        }
     }
 }
