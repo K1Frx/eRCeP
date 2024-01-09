@@ -1,5 +1,5 @@
 import Container from 'react-bootstrap/esm/Container';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import Navbar from './components/navbar/Navbar'
 import LandingPage from './pages/landingPage/landingPage';
 import './index.scss';
@@ -13,23 +13,21 @@ import Employers from './pages/employers/employers';
 import { createContext, useState } from 'react';
 import Header from './components/header/Header';
 import { Loader } from './components/loader/Loader';
+import { useStorageState } from './hooks/useStorageState';
+import LoginButton from './components/loginButton/loginButton';
 
 export const AppContext = createContext<{
-  loggedIn: boolean,
-  setLoggedIn: (React.Dispatch<React.SetStateAction<boolean>> | Function),
-  loading: boolean,
   setLoading: (React.Dispatch<React.SetStateAction<boolean>> | Function),
-}>({ loggedIn: false, setLoggedIn: () => { }, loading: false, setLoading: () => { } });
+}>({ setLoading: () => { } });
 
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState<boolean>(false);
+  let loginToken = useStorageState({ state: "loginToken" });
   const [loading, setLoading] = useState<boolean>(false);
-
   return (
     <Container fluid="true" className="main-container">
       <Router>
-        <AppContext.Provider value={{ loggedIn, setLoggedIn, loading, setLoading }}>
+        <AppContext.Provider value={{ setLoading }}>
           <div className='navbar'><Navbar /></div>
           <div className='header'><Header /></div>
           <div className="pageContainer">
@@ -37,11 +35,13 @@ function App() {
             <Routes>
               <Route path="/" Component={LandingPage} />
               <Route path="/about" Component={About} />
-              <Route path="/admin" Component={Admin} />
-              <Route path="/employers" Component={Employers} />
-              <Route path="/settings" Component={Settings} />
-              <Route path="/timesheets" Component={Timesheets} />
-              <Route path="/workers" Component={Workers} />
+              <Route path="/settings" element={<Settings />} />
+              <Route element={<ProtectedRoute />}>
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/employers" element={<Employers />} />
+                <Route path="/timesheets" element={<Timesheets />} />
+                <Route path="/workers" element={<Workers />} />
+              </Route>
               <Route path="/404" Component={NotFound} />
               <Route
                 path="*"
@@ -55,5 +55,11 @@ function App() {
     </Container>
   )
 }
+
+const ProtectedRoute = () => {
+  let loginToken = useStorageState({ state: "loginToken" });
+  return loginToken && loginToken.store ? <Outlet /> : <Navigate to="/" replace />;
+};
+
 
 export default App

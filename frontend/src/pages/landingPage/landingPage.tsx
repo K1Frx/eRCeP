@@ -1,16 +1,12 @@
-import { useContext } from "react";
-import { AppContext } from "../../App";
-import LoginButton from "../../components/loginButton/loginButton";
 import "./LandingPage.scss";
+import LoginButton from "../../components/loginButton/loginButton";
 
 const LandingPage = () => {
-    const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
 
-    if (!loggedIn) return <LoginButton />;
     
     return (
         <div className="landingPageContainer">
-           <h1 className="title"></h1>
+           <LoginButton />
         </div>
     );
 };

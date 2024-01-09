@@ -44,6 +44,7 @@ a {
   .pageContainer {
     grid-column: 2; /* Occupy the second column */
     grid-row: 2; /* Occupy the second row */
+    position: relative;
   }
 
   @media screen and (max-width: consts.$mobile-width) {

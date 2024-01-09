@@ -1,6 +1,5 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AppContext } from "../../App";
-import LoginButton from "../../components/loginButton/loginButton";
 import "./timesheets.scss";
 import { CompactTable } from '@table-library/react-table-library/compact';
 import { TableNode } from "@table-library/react-table-library/types/table";
@@ -68,7 +67,7 @@ const COLUMNS = [
 
 
 const Timesheets = () => {
-    const { loggedIn, setLoggedIn, loading, setLoading } = useContext(AppContext);
+    const { setLoading } = useContext(AppContext);
     const nodes: TableNode[] = [
         {
             id: '0',

@@ -26,5 +26,14 @@
         &:hover {
             scale: 1.1;
         }
+
+        &:disabled {
+            background: var(--disabled-primary);
+            // color: var(--white-secondary);
+            cursor: wait;
+            &:hover {
+                scale: 1;
+            }
+        }
     }
 }

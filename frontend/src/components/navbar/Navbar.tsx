@@ -8,15 +8,27 @@ import { faClock } from "@fortawesome/free-solid-svg-icons/faClock";
 import { faGear } from "@fortawesome/free-solid-svg-icons/faGear";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket";
 import { AppContext } from "../../App";
+import { useStorageState } from "../../hooks/useStorageState";
 
 function Navbar() {
-  const{loggedIn, setLoggedIn, loading, setLoading} = useContext(AppContext);
+  const{setLoading} = useContext(AppContext);
+  let loginToken = useStorageState({ state: "loginToken" });
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const [click, setClick] = useState(false);
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
 
+  const logout = () => {
+    setLoading(true);
+    setDisabled(true);
+    setTimeout(() => {
+        loginToken.setStorageState("");
+        setDisabled(false);
+        setLoading(false);
+    }, 500);
+}
 
   return (
     <nav className="navbar-site">
@@ -89,9 +101,9 @@ function Navbar() {
               <FontAwesomeIcon icon={faGear} />
             </Link>
             <button
-              disabled={!loggedIn}
+              disabled={!loginToken.store || disabled}
               className="nav-links logout-button"
-              onClick={() => { alert("You have been logged out.") }}
+              onClick={logout}
             >
               <FontAwesomeIcon icon={faRightFromBracket} />
             </button>
