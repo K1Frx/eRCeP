@@ -8,6 +8,7 @@ $mobile-width: 720px;
     --black-hover: #242424;
     --white-primary: #fff;
     --background-primary: #fff;
+    --main-text-color: #000;
 }
 
 html[data-theme="light"] {
@@ -16,6 +17,7 @@ html[data-theme="light"] {
     --black-hover: #242424;
     --white-primary: #fff;
     --background-primary: #fff;
+    --main-text-color: #000;
 }
 
 //dark theme
@@ -25,4 +27,5 @@ html[data-theme="dark"] {
     --black-hover: #242424;
     --white-primary: #fff;
     --background-primary: #494949;
+    --main-text-color: #fff;
 }

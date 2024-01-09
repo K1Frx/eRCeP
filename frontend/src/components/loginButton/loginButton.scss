@@ -1,19 +1,30 @@
 @use "../../assets/consts";
 
-.loginButton {
-    font-size: 2rem;
-    font-weight: 500;
-    background: var(--black-primary);
-    color: var(--white-primary);
-    padding: 0.5rem 2rem;
-    border-radius: 2rem;
-    min-width: 15rem;
+.loginButtonContainer {
+    width: 100%;
+    height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: all 0.2s ease-in-out;
+    gap: 2rem;
+    color: var(--main-text-color);
 
-    &:hover {
-        scale: 1.1;
+    .loginButton {
+        font-size: 2rem;
+        font-weight: 500;
+        background: var(--black-primary);
+        color: var(--white-primary);
+        padding: 0.5rem 2rem;
+        border-radius: 0.5rem;
+        min-width: 15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            scale: 1.1;
+        }
     }
 }

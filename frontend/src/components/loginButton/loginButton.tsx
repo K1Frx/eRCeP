@@ -17,7 +17,10 @@ const LoginButton = () => {
 
 
     return (
+        <div className="loginButtonContainer">
+            <h1>You need to login</h1>
         <button onClick={loginRequest} className="loginButton">Login</button>
+        </div>
     );
 };
 

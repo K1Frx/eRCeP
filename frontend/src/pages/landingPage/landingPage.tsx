@@ -10,7 +10,7 @@ const LandingPage = () => {
     
     return (
         <div className="landingPageContainer">
-           <h1 className="title"><LoginButton/></h1>
+           <h1 className="title"></h1>
         </div>
     );
 };
