@@ -1,63 +1,85 @@
-import axios from "axios";
 import "./loginButton.scss"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { useStorageState } from "../../hooks/useStorageState";
-import { faSheqel } from "@fortawesome/free-solid-svg-icons";
+import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginButton = () => {
+    const navigate = useNavigate();
     const { setLoading } = useContext(AppContext);
     let loginToken = useStorageState({ state: "loginToken" });
-    const [content, setContent] = useState<{ text: string, button: string }>({ text: "You need to login", button: "Login" });
     const [disabled, setDisabled] = useState<boolean>(false);
+    const [login, setLogin] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [error, setError] = useState<boolean>(false);
 
-    const textChange = () => {
-        if (loginToken && loginToken.store) {
-            setContent({ text: "You need to login", button: "Login" });
-        }
-        else {
-            setContent({ text: "You are logged in", button: "Logout" });
-        }
-    }
-
-    const loginRequest = () => {
+    const loginFunc = ({login, password}: {login: string, password: string}) => {
         setLoading(true);
         setDisabled(true);
-        textChange();
-        axios
-            .post("http://frxx.pythonanywhere.com/login/", {
-                username: "frxx",
-                password: "52645",
-            })
-            .then((res) => {
-                console.log(res);
-                loginToken.setStorageState(res.data.token);
-                setDisabled(false);
-                setLoading(false);
-            })
+        axios.post("http://frxx.pythonanywhere.com/login/", {
+            username: login,
+            password: password,
+        }).then((res) => {
+            loginToken.setStorageState(res.data.token);
+            navigate("/timesheets");
+            setError(false);
+            setDisabled(false);
+            setLoading(false);
+        })
             .catch((err) => {
-                console.log(err);
+                setError(true);
                 setDisabled(false);
                 setLoading(false);
             });
     }
 
-    const logout = () => {
+    const logoutFunc = () => {
         setLoading(true);
         setDisabled(true);
         setTimeout(() => {
-            textChange();
             loginToken.setStorageState("");
             setDisabled(false);
             setLoading(false);
         }, 500);
     }
 
-
     return (
         <div className="loginButtonContainer">
-            <h1>{content.text}</h1>
-            <button onClick={loginToken && loginToken.store ? logout : loginRequest} className="loginButton" disabled={disabled}>{content.button}</button>
+            {loginToken && loginToken.store === "" ?
+                <>
+                    <h1>You need to login</h1>
+                    <Form onSubmit={(e) => {e.preventDefault(); loginFunc({login: login, password: password})}}>
+                        <Form.Group controlId="formBasicEmail">
+                            <Form.Label>Login</Form.Label>
+                            <Form.Control 
+                            type="text" 
+                            placeholder="Login"
+                            value={login}
+                            onChange={(e) => setLogin(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>Password</Form.Label>
+                            <Form.Control 
+                            type="password" 
+                             placeholder="Password"
+                             value={password}
+                             onChange={(e) => setPassword(e.target.value)}
+                             />
+                        </Form.Group>
+                        {error && <p className="error">Wrong login or password</p>}
+                        <button className="loginButton" disabled={disabled}>Login</button>
+                    </Form>
+
+                </>
+                :
+                <>
+                    <h1>You are logged in</h1>
+                    <button onClick={logoutFunc} className="loginButton" disabled={disabled}>Logout</button>
+                </>
+            }
         </div>
     );
 };
