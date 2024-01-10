@@ -1,7 +1,7 @@
 @use "../../assets/consts";
 
 .navbar-site {
-  background: var(--black-primary);
+  background: var(--background-secondary);
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -16,7 +16,7 @@
   z-index: 999;
 
   .navbar-logo {
-    color: var(--white-primary);
+    color: var(--secondary-text-color);
     justify-self: start;
     height: auto;
     cursor: pointer;
@@ -34,13 +34,13 @@
     // height: 3rem;
     // display: flex;
     // align-items: center;
-    color: var(--white-primary);
+    color: var(--secondary-text-color);
     padding: 1.4rem 2rem;
     position: fixed;
     top: 0;
     right: 0;
     // justify-content: start;
-    // border-bottom: 0.2rem solid var(--white-primary);
+    // border-bottom: 0.2rem solid var(--secondary-text-color);
   }
 
   .nav-menu {
@@ -55,7 +55,7 @@
   }
 
   .nav-links {
-    color: var(--white-primary);
+    color: var(--secondary-text-color);
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -66,9 +66,9 @@
   }
 
   .nav-links:hover {
-    border-bottom: 0.1rem solid var(--white-primary);
+    border-bottom: 0.1rem solid var(--secondary-text-color);
     transition: all 0.2s ease-out;
-    color: var(--white-primary);
+    color: var(--secondary-text-color);
   }
 
   .bottom-buttons {
@@ -77,7 +77,7 @@
     align-items: center;
     margin-top: auto;
     padding: 1rem;
-    color: var(--white-primary);
+    color: var(--secondary-text-color);
   }
 
   button:disabled,
@@ -121,7 +121,7 @@
     }
 
     .nav-menu.active {
-      background: var(--black-secondary);
+      background: var(--mobile-menu-color);
       left: 0;
       opacity: 1;
       transition: all 0.5s ease;
@@ -139,13 +139,13 @@
     }
 
     .nav-links:hover {
-      background-color: var(--white-primary);
-      color: var(--black-hover);
+      background-color: var(--secondary-text-color);
+      color: var(--navbar-hover);
       border-radius: 0;
     }
 
     .navbar-logo {
-      color: var(--white-primary);
+      color: var(--secondary-text-color);
       display: flex;
       align-items: center;
       justify-content: start;

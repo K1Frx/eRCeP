@@ -8,7 +8,7 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    color: var(--main-text-color);
+    color: var(--primary-text-color);
 
     .error {
         color: var(--red);
@@ -21,8 +21,8 @@
     .loginButton {
         font-size: 2rem;
         font-weight: 500;
-        background: var(--black-primary);
-        color: var(--white-primary);
+        background: var(--background-secondary);
+        color: var(--secondary-text-color);
         padding: 0.5rem 2rem;
         border-radius: 0.5rem;
         min-width: 15rem;

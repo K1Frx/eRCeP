@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     // gap: 1rem;
-    color: var(--black-primary);
+    color: var(--background-secondary);
     font-size: 2rem;
 
     .themeSwitch {
@@ -11,8 +11,8 @@
         justify-content: space-between;
         align-items: center;
         // gap: 0.5rem;
-        background-color: var(--black-primary);
-        color: var(--white-primary);
+        background-color: var(--background-secondary);
+        color: var(--secondary-text-color);
         padding: 1rem;
         border-radius: 0.5rem;
         cursor: pointer;

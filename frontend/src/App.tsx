@@ -13,7 +13,7 @@ import { createContext, useState } from 'react';
 import Header from './components/header/Header';
 import { Loader } from './components/loader/Loader';
 import { useStorageState } from './hooks/useStorageState';
-// import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import './index.scss';
 
 export const AppContext = createContext<{

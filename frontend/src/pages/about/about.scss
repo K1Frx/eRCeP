@@ -8,7 +8,7 @@
     align-items: center;
     gap: 2rem;
     margin: 1rem;
-    color: var(--main-text-color);
+    color: var(--primary-text-color);
     .title {
         position: relative;
         &::after {
@@ -18,7 +18,7 @@
             content: '';
             width: 300%;
             margin: 10px auto;
-            border-top: 0.1rem solid var(--main-text-color);
+            border-top: 0.1rem solid var(--primary-text-color);
          }
 
     }
