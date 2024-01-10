@@ -5,13 +5,14 @@ $mobile-width: 720px;
     --width: calc(100% - var(--navbar-width));
     --background-primary: #fff;
     --background-secondary: #c99789;
-    --mobile-menu-color: rgba(224,168,153, 0.9);;
+    --mobile-menu-color: rgba(224, 168, 153, 0.9);
+    ;
     --navbar-hover: #242424;
 
     --primary-text-color: #000;
     --secondary-text-color: #fff;
-    --table-header: #FFFDD0;
-    --table-row: #fff;
+    --table-header: rgba(224, 168, 153, 0.7);
+    --table-row-hover: #ffe9dc;
 
     --loader: #646cff;
     --disabled-primary: #7a7a7a;
@@ -21,13 +22,13 @@ $mobile-width: 720px;
 html[data-theme="light"] {
     --background-primary: #fff;
     --background-secondary: #c99789;
-    --mobile-menu-color: rgba(224,168,153, 0.9);
+    --mobile-menu-color: rgba(224, 168, 153, 0.9);
     --navbar-hover: #242424;
-    
+
     --primary-text-color: #000;
     --secondary-text-color: #fff;
-    --table-header: #FFFDD0;
-    --table-row: #fff;
+    --table-header: rgba(224, 168, 153, 0.7);
+    --table-row-hover: #ffe9dc;
 }
 
 //dark theme
@@ -39,6 +40,6 @@ html[data-theme="dark"] {
 
     --primary-text-color: #fff;
     --secondary-text-color: #fff;
-    --table-header: #fff;
-    --table-row: #fff;
+    --table-header: rgba(66, 66, 66, 0.7);
+    --table-row-hover: #999999;
 }
