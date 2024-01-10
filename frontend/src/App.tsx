@@ -9,7 +9,7 @@ import Admin from './pages/admin/admin';
 import Settings from './pages/settings/settings';
 import Timesheets from './pages/timesheets/timesheets';
 import Employers from './pages/employers/employers';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import Header from './components/header/Header';
 import { Loader } from './components/loader/Loader';
 import { useStorageState } from './hooks/useStorageState';
@@ -28,6 +28,29 @@ function App() {
   const [showError, setShowError] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    switch (true) {
+        case localStorage.getItem("themeKey") === "dark":
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem("themeKey", "dark");
+            break;
+        case localStorage.getItem("themeKey") === "light":
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem("themeKey", "light");
+            break;
+        case window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches:
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem("themeKey", "dark");
+            break;
+        default:
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem("themeKey", "light");
+            break;
+    }
+}, []); //detect preffered color scheme
+
+
   return (
     <Container fluid="true" className="main-container">
       <Router>
