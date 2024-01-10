@@ -23,7 +23,7 @@ const LoginButton = () => {
             password: password,
         }).then((res) => {
             loginToken.setStorageState(res.data.token);
-            navigate("/timesheets");
+            // navigate("/timesheets");
             setError(false);
             setDisabled(false);
             setLoading(false);
@@ -52,7 +52,7 @@ const LoginButton = () => {
                     <h1>You need to login</h1>
                     <Form onSubmit={(e) => {e.preventDefault(); loginFunc({login: login, password: password})}}>
                         <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Login</Form.Label>
+                            {/* <Form.Label>Login</Form.Label> */}
                             <Form.Control 
                             type="text" 
                             placeholder="Login"
@@ -61,7 +61,7 @@ const LoginButton = () => {
                             />
                         </Form.Group>
                         <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
+                            {/* <Form.Label>Password</Form.Label> */}
                             <Form.Control 
                             type="password" 
                              placeholder="Password"

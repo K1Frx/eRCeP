@@ -15,22 +15,28 @@ import { Loader } from './components/loader/Loader';
 import { useStorageState } from './hooks/useStorageState';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.scss';
+import ErrorModal from './components/errorModal/errorModal';
 
 export const AppContext = createContext<{
+  setShowError: (React.Dispatch<React.SetStateAction<boolean>> | Function),
+  setError: (React.Dispatch<React.SetStateAction<string>> | Function),
   setLoading: (React.Dispatch<React.SetStateAction<boolean>> | Function),
-}>({ setLoading: () => { } });
+}>({ setShowError: () => { }, setError: () => { }, setLoading: () => { }  });
 
 
 function App() {
+  const [showError, setShowError] = useState<boolean>(false);
+  const [error, setError] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   return (
     <Container fluid="true" className="main-container">
       <Router>
-        <AppContext.Provider value={{ setLoading }}>
+        <AppContext.Provider value={{ setShowError, setError, setLoading }}>
           <div className='navbar'><Navbar /></div>
           <div className='header'><Header /></div>
           <div className="pageContainer">
             {loading && <Loader />}
+            {showError && <ErrorModal errorMessage={error} />}
             <Routes>
               <Route path="/" Component={LandingPage} />
               <Route path="/about" Component={About} />

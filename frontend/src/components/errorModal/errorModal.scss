@@ -1,0 +1,55 @@
+@use "../../assets/consts";
+
+.modal-open {
+    padding-right: 0px !important;
+}
+
+.modal-content {
+    background: var(--background-secondary);
+    color: #fff;
+
+
+
+    .modal-header {
+        background: url("../../../public/images/juwe-background.png");
+        background-size: 100% auto;
+        height: 3rem;
+    }
+
+    .modal-body {
+        height: 4rem;
+        font-size: 1.2rem;
+        margin: 0 auto 0 auto;
+        text-align: center;
+    }
+
+    .btn {
+
+        background-color: transparent;
+        font-size: 1.1rem;
+        transition: all 0.2s ease-in-out;
+        border: 0.1rem solid var(--secondary-text-color);
+        &:hover {
+            scale: 1.05;
+        }
+    }
+
+    // .btn-close {
+    //     background-color: white
+    // }
+
+    .modal-footer {
+        border: 0;
+        margin: 0 0 0 25%;
+    }
+
+    .modal-button:hover {
+        transform: scale(105%);
+    }
+
+    // @media screen and (max-width: consts.$mobile-width) {
+    //     justify-content: center;
+    //     align-items: center;
+    // }
+
+}

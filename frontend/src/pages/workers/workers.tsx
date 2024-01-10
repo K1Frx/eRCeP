@@ -7,7 +7,7 @@ import Table from "react-bootstrap/esm/Table";
 
 
 const Workers = () => {
-    const { setLoading } = useContext(AppContext);
+    const { setShowError, setError, setLoading } = useContext(AppContext);
     let loginToken = useStorageState({ state: "loginToken" });
     const tableHeaders = ["ID", "Name", "Surname", "Birth date", "Email", "Phone", "Contracts"]
     const [workers, setWorkers] = useState<any[]>([]);
@@ -20,14 +20,14 @@ const Workers = () => {
                     Authorization: `Bearer ${loginToken.store}`
                 }
             }).then((res) => {
-                console.log(res.data.items);
                 setWorkers(res.data.items);
                 // setError(false);
                 // setDisabled(false);
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err);
+                setError(err.message);
+                setShowError(true);
                 // setError(true);
                 // setDisabled(false);
                 setLoading(false);
