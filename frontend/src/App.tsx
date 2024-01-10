@@ -2,7 +2,6 @@ import Container from 'react-bootstrap/esm/Container';
 import { BrowserRouter as Router, Routes, Route, Navigate, Outlet } from 'react-router-dom'
 import Navbar from './components/navbar/Navbar'
 import LandingPage from './pages/landingPage/landingPage';
-import './index.scss';
 import Workers from './pages/workers/workers';
 import NotFound from './pages/notFound/notFound';
 import About from './pages/about/about';
@@ -14,7 +13,8 @@ import { createContext, useState } from 'react';
 import Header from './components/header/Header';
 import { Loader } from './components/loader/Loader';
 import { useStorageState } from './hooks/useStorageState';
-import LoginButton from './components/loginButton/loginButton';
+// import 'bootstrap/dist/css/bootstrap.css';
+import './index.scss';
 
 export const AppContext = createContext<{
   setLoading: (React.Dispatch<React.SetStateAction<boolean>> | Function),
@@ -22,7 +22,6 @@ export const AppContext = createContext<{
 
 
 function App() {
-  let loginToken = useStorageState({ state: "loginToken" });
   const [loading, setLoading] = useState<boolean>(false);
   return (
     <Container fluid="true" className="main-container">

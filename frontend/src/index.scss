@@ -71,6 +71,11 @@ button {
   cursor: pointer;
 }
 
+h1 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
 input, select {
   width: 100%;
   padding: 0.7rem 1rem;
@@ -93,5 +98,12 @@ input[type=submit] {
 }
 
 input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+td{
+  background-color: #45a049;
+}
+th{
   background-color: #45a049;
 }
