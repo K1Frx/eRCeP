@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import Button from 'react-bootstrap/esm/Button';
 import Modal from 'react-bootstrap/esm/Modal';
 import { AppContext } from '../../App';
-import './errorModal.scss';
+import "../../assets/modalStyle.scss"
 
 interface ErrorModalProps {
     errorMessage: string;
@@ -15,8 +15,8 @@ const ErrorModal: React.FC<ErrorModalProps> = ({ errorMessage }) => {
     const refresh = () => {setShowError(false); location.reload();};
     const mainMenuRoute = () => {setShowError(false); location.href = "/"};
     
-    return (
-        <Modal show={true} onHide={refresh} centered>
+    return ( //TODO change setShowError(false) to refresh
+        <Modal show={true} onHide={setShowError(false)} centered className="modalContainer">
         <Modal.Header closeButton>
           <Modal.Title>Whoops!</Modal.Title>
         </Modal.Header>

@@ -23,30 +23,30 @@ export default function ThemeSwitch() {
                 break;
         }
     }
-    useEffect(() => {
-        switch (true) {
-            case localStorage.getItem("themeKey") === "dark":
-                document.documentElement.setAttribute('data-theme', 'dark');
-                setTheme("dark");
-                localStorage.setItem("themeKey", "dark");
-                break;
-            case localStorage.getItem("themeKey") === "light":
-                document.documentElement.setAttribute('data-theme', 'light');
-                setTheme("light");
-                localStorage.setItem("themeKey", "light");
-                break;
-            case window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches:
-                document.documentElement.setAttribute('data-theme', 'dark');
-                setTheme("dark");
-                localStorage.setItem("themeKey", "dark");
-                break;
-            default:
-                document.documentElement.setAttribute('data-theme', 'light');
-                setTheme("light");
-                localStorage.setItem("themeKey", "light");
-                break;
-        }
-    }, []);
+    // useEffect(() => {
+    //     switch (true) {
+    //         case localStorage.getItem("themeKey") === "dark":
+    //             document.documentElement.setAttribute('data-theme', 'dark');
+    //             setTheme("dark");
+    //             localStorage.setItem("themeKey", "dark");
+    //             break;
+    //         case localStorage.getItem("themeKey") === "light":
+    //             document.documentElement.setAttribute('data-theme', 'light');
+    //             setTheme("light");
+    //             localStorage.setItem("themeKey", "light");
+    //             break;
+    //         case window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches:
+    //             document.documentElement.setAttribute('data-theme', 'dark');
+    //             setTheme("dark");
+    //             localStorage.setItem("themeKey", "dark");
+    //             break;
+    //         default:
+    //             document.documentElement.setAttribute('data-theme', 'light');
+    //             setTheme("light");
+    //             localStorage.setItem("themeKey", "light");
+    //             break;
+    //     }
+    // }, []);
 
     return (
         <div className='themeSwitchContainer'>
