@@ -16,7 +16,10 @@ import { smallModal } from '../../../components/smallComponents/smallComponents'
 const workerSchema = Yup.object().shape({
     first_name: Yup.string().required('Required'),
     last_name: Yup.string().required('Required'),
-    email: Yup.string().email('Invalid email').required('Required'),
+    email: Yup.string().email('Invalid email').matches(
+        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+        'Invalid email'
+    ).required('Required'),
     phone_number: Yup.string().matches(
         /^\+.*/,
         'Invalid phone number format. Use format: +999999999'

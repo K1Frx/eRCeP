@@ -94,6 +94,8 @@ const Workers = () => {
                 range={range}
                 setShowModal={setShowModal}
                 setWorkerModalData={setWorkerModalData}
+                rowsPerPage={rowsPerPage}
+                setRowsPerPage={setRowsPerPage}
             />
         </div>
     );

@@ -8,3 +8,10 @@ export interface workerType {
   // contracts: string | null;
   user?: string;
 }
+
+export interface employerType {
+  id?: number;
+  name: string;
+  nip: string;
+  adress: string | null;
+}

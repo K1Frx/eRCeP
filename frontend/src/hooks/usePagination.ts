@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
-import { workerType } from "../types/types";
 
-const calculateRange = (data: workerType[], rowsPerPage: number) => {
+const calculateRange = (data: any[], rowsPerPage: number) => {
     const range = [];
     const num = Math.ceil(data.length / rowsPerPage);
     let i = 1;
@@ -12,9 +11,9 @@ const calculateRange = (data: workerType[], rowsPerPage: number) => {
   };
   
   
-  const usePagination = (data: workerType[], page: number, rowsPerPage: number) => {
+  const usePagination = <T>(data: T[], page: number, rowsPerPage: number): {slice: T[], range: number[]} => {
     const [tableRange, setTableRange] = useState<number[]>([]);
-    const [slice, setSlice] = useState<workerType[]>([]);
+    const [slice, setSlice] = useState<any[]>([]);
   
     useEffect(() => {
       const range = calculateRange(data, rowsPerPage);
