@@ -33,7 +33,7 @@ a {
   grid-template-rows: 4rem 1fr;
   /* 5rem for the header, 1fr for the rest of the content */
   // margin-left: var(--navbar-width);
-  height: 100vh;
+  height: 100dvh;
 
   .app-container {
     grid-template-columns: 15rem 1fr; /* 15rem for the navbar, 1fr for the rest of the content */
