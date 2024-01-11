@@ -82,7 +82,7 @@ const Workers = () => {
             </Table>
             <div className="footer">
                 <div className="pagination"/>
-                <OverlayTrigger placement="top" overlay={customTooltip("Create User")} delay={200}>
+                <OverlayTrigger trigger={["hover"]} placement="top" overlay={customTooltip("Create Worker")} delay={200}>
                 <button className="addButton" onClick={() => { setWorkerModalData(null); setShowModal(true) }}>
                 <FontAwesomeIcon icon={faPlus} className="addButtonIcon"/>
                 </button>

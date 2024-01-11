@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/esm/Modal";
 import Button from "react-bootstrap/esm/Button";
 
 export const customTooltip = (text: string) => (
-  <Tooltip id={text} className="customTooltip">
+  <Tooltip id={text} className="customTooltip" style={{position:"fixed"}}>
     {text}
   </Tooltip>
 );

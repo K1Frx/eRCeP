@@ -38,7 +38,7 @@ interface editWorkerModalProps {
     getWorkers: () => void;
 }
 
-const EditWorkerModal: React.FC<editWorkerModalProps> = ({ id, setShow, worker, getWorkers }) => {
+const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalProps) => {
     const { setShowError, setError, setLoading } = useContext(AppContext);
     let loginToken = useStorageState({ state: "loginToken" });
     const [disabled, setDisabled] = useState<boolean>(false);
