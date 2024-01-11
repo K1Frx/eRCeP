@@ -73,7 +73,7 @@ const Workers = () => {
                             <td>{worker.birth_date}</td>
                             <td>{worker.email}</td>
                             <td>{worker.phone_number}</td>
-                            <td><Button onClick={() => {alert("TODO expand")}}>Expand</Button></td>
+                            <td><Button onClick={(e) => {alert("TODO expand"); e.stopPropagation()}}>Expand</Button></td>
                             {/* items have unused user value */}
                         </tr>
                     ))

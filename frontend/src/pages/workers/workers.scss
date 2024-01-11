@@ -30,11 +30,20 @@
             height: 5rem;
             vertical-align: middle;
             cursor: pointer;
+
+            &:last-child {
+                text-align: center;
+            }
         }
 
         .btn {
             border: none;
             background-color: var(--background-secondary);
+            transition: all 0.2s ease-in-out;
+
+            &:hover {
+                scale: 1.05;
+            }
         }
 
         // width:100%;
@@ -46,7 +55,7 @@
         //     // overflow: auto auto;
         //     td {
         //         // text-align: center;
-                
+
         //     }
         // }
     }
@@ -74,6 +83,29 @@
 
             &:hover {
                 scale: 1.1;
+            }
+        }
+    }
+
+    @media screen and (max-width: consts.$mobile-width) {
+        padding: 0;
+
+        .table {
+            th {
+                text-align: center;
+                &:nth-child(4),
+                &:nth-child(5),
+                &:nth-child(6) {
+                    display: none;
+                }
+            }
+            td {
+                text-align: center;
+                &:nth-child(4),
+                &:nth-child(5),
+                &:nth-child(6) {
+                    display: none;
+                }
             }
         }
     }
