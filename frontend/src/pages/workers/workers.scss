@@ -1,5 +1,6 @@
 @use "../../assets/consts";
 
+
 .workersContainer {
     width: 100%;
     height: 100%;
@@ -40,47 +41,65 @@
             border: none;
             background-color: var(--background-secondary);
             transition: all 0.2s ease-in-out;
+
             &:focus {
                 background-color: var(--background-secondary);
                 border: none;
             }
+
             &:hover {
                 scale: 1.05;
             }
         }
 
-        // width:100%;
-        // // overflow:auto;
-        // @media screen and (max-width: consts.$mobile-width) {
-
-        //     // display: block;
-        //     // // width: var(--width);
-        //     // overflow: auto auto;
-        //     td {
-        //         // text-align: center;
-
-        //     }
-        // }
     }
 
     .footer {
         display: flex;
         justify-content: space-between;
         align-items: end;
-        padding: 1rem;
+        // padding: 1rem;
         width: 100%;
         height: 100%;
 
-        .pagination {
-            .paginationButton{
-                border: none;
-                background-color:  var(--background-secondary);
-                &:hover {
-                    scale: 1.05;
+        .pageOptions {
+            display: flex;
+            // flex-direction: column;
+            justify-content: space-between;
+            align-items: start;
+            gap: 0.2rem;
+            padding: 1rem;
+
+            select {
+                margin: 0;
+                border: 0.05rem solid var(--background-secondary);
+                background-color: var(--background-primary);
+                color: var(--primary-text-color);
+                --bs-form-select-bg-img: var(--select-arrow-img);
+                &:focus {
+                    box-shadow: none !important;
                 }
             }
-        }
 
+            .pagination {
+                .paginationButton {
+                    background-color: transparent;
+                    border: 0.1rem solid var(--background-secondary);
+                    color: var(--background-secondary);
+
+                    &:hover {
+                        scale: 1.05;
+                    }
+                }
+
+                .activeButton {
+                    border: none;
+                    background-color: var(--background-secondary);
+                    color: var(--secondary-text-color);
+                }
+            }
+
+        }
 
         .addButton {
             display: inline-block;
@@ -99,6 +118,7 @@
                 scale: 1.1;
             }
         }
+
     }
 
     @media screen and (max-width: consts.$mobile-width) {
@@ -107,14 +127,17 @@
         .table {
             th {
                 text-align: center;
+
                 &:nth-child(4),
                 &:nth-child(5),
                 &:nth-child(6) {
                     display: none;
                 }
             }
+
             td {
                 text-align: center;
+
                 &:nth-child(4),
                 &:nth-child(5),
                 &:nth-child(6) {
@@ -131,4 +154,13 @@
         font-size: 1.1rem;
         line-height: 0.4;
     }
+}
+
+//dark theme
+html[data-theme="light"] {
+    --select-arrow-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23c99789' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
+}
+
+html[data-theme="dark"] {
+    --select-arrow-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e");
 }

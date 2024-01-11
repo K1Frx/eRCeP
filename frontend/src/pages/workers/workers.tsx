@@ -6,13 +6,9 @@ import { useStorageState } from "../../hooks/useStorageState";
 import Table from "react-bootstrap/esm/Table";
 import { workerType } from "../../types/types";
 import EditWorkerModal from "./components/editWorkerModal";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
-import { customTooltip } from "../../components/smallComponents/smallComponents";
 import Button from "react-bootstrap/esm/Button";
-import { date } from "yup";
 import usePagination from "../../hooks/usePagination";
+import { WorkerTableFooter } from "./components/workerTableFooter";
 
 
 const Workers = () => {
@@ -48,7 +44,7 @@ const Workers = () => {
         getWorkers();
     }, []);
     const [page, setPage] = useState(1);
-    const rowsPerPage = 10;
+    const [rowsPerPage, setRowsPerPage] = useState(10);
     const { slice, range } = usePagination(workers, page, rowsPerPage);
 
 
@@ -56,7 +52,7 @@ const Workers = () => {
         if (slice.length < 1 && page !== 1) {
             setPage(page - 1);
         }
-    }, [slice, page, setPage]);
+    }, [slice, page, setPage]); //pagination effect
 
     return (
         <div className="workersContainer">
@@ -92,24 +88,13 @@ const Workers = () => {
                     }
                 </tbody>
             </Table>
-            <div className="footer">
-                <div className="pagination">
-                    {range.map((el, index) => (
-                        <Button
-                            key={index}
-                            className="paginationButton"
-                            onClick={() => setPage(el)}
-                        >
-                            {el}
-                        </Button>
-                    ))}
-                </div>
-                <OverlayTrigger trigger={["hover"]} placement="top" overlay={customTooltip("Create Worker")} delay={200}>
-                    <button className="addButton" onClick={() => { setWorkerModalData(null); setShowModal(true) }}>
-                        <FontAwesomeIcon icon={faPlus} className="addButtonIcon" />
-                    </button>
-                </OverlayTrigger>
-            </div>
+            <WorkerTableFooter
+                page={page}
+                setPage={setPage}
+                range={range}
+                setShowModal={setShowModal}
+                setWorkerModalData={setWorkerModalData}
+            />
         </div>
     );
 };
