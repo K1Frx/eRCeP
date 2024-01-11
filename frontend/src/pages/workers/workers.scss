@@ -76,6 +76,7 @@
                 background-color: var(--background-primary);
                 color: var(--primary-text-color);
                 --bs-form-select-bg-img: var(--select-arrow-img);
+
                 &:focus {
                     box-shadow: none !important;
                 }
@@ -149,10 +150,42 @@
 }
 
 .editWorkerModalContainer {
-    .validationError {
-        color: var(--error);
-        font-size: 1.1rem;
-        line-height: 0.4;
+    form {
+        .formGroup {
+            // background-color: var(--table-header);
+            border: 0.1rem solid var(--background-primary);
+            margin: 0 0 0.5rem 0;
+            border-radius: 0.5rem;
+            padding: 0 0.5rem 0.5rem 0.5rem;
+
+            label {
+                display: block;
+                margin: 0;
+                text-align: start;
+                padding: 0 0 0 0.5rem;
+                // line-height: 0.6;
+                // margin: 0.5rem 0 0.2rem 0;
+            }
+
+            .form-control {
+                margin: 0;
+            }
+        }
+        .groupError {
+            // padding: 0.1rem 0 0 0;
+            background-color: rgba(var(--error-rgb), 0.25);
+            border: 0.1rem solid var(--error);
+            padding: 0 0.5rem 0 0.5rem;
+
+
+            .validationError {
+                // color: var(--error);
+                text-align: start;
+                font-size: 0.9rem;
+                padding: 0 0 0 0.5rem;
+                // line-height: 0.4;
+            }
+        }
     }
 }
 

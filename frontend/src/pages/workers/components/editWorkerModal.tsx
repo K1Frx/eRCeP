@@ -164,8 +164,8 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                             </Modal.Header>
                             <Modal.Body>
 
-                                <Form.Group>
-                                    {/* <Form.Label>Login</Form.Label> */}
+                                <Form.Group className={`formGroup ${errors.first_name && touched.first_name && "groupError"}`}>
+                                    <Form.Label>Name</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Name"
@@ -176,8 +176,8 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                                     />
                                     {errors.first_name && touched.first_name && <div className='validationError'>{errors.first_name}</div>}
                                 </Form.Group>
-                                <Form.Group>
-                                    {/* <Form.Label>Password</Form.Label> */}
+                                <Form.Group className={`formGroup ${errors.last_name && touched.last_name && "groupError"}`}>
+                                    <Form.Label>Surname</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Surname"
@@ -188,8 +188,8 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                                     />
                                     {errors.last_name && touched.last_name && <div className='validationError'>{errors.last_name}</div>}
                                 </Form.Group>
-                                <Form.Group>
-                                    {/* <Form.Label>Password</Form.Label> */}
+                                <Form.Group className={`formGroup ${errors.birth_date && touched.birth_date && "groupError"}`}>
+                                    <Form.Label>Birth Date</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Birth Date"
@@ -200,8 +200,8 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                                     />
                                     {errors.birth_date && touched.birth_date && <div className='validationError'>{errors.birth_date}</div>}
                                 </Form.Group>
-                                <Form.Group>
-                                    {/* <Form.Label>Password</Form.Label> */}
+                                <Form.Group className={`formGroup ${errors.email && touched.email && "groupError"}`}>
+                                    <Form.Label>Email</Form.Label>
                                     <Form.Control
                                         type="email"
                                         placeholder="Email"
@@ -212,8 +212,8 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                                     />
                                     {errors.email && touched.email && <div className='validationError'>{errors.email}</div>}
                                 </Form.Group>
-                                <Form.Group>
-                                    {/* <Form.Label>Password</Form.Label> */}
+                                <Form.Group className={`formGroup ${errors.phone_number && touched.phone_number && "groupError"}`}>
+                                    <Form.Label>Phone</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="phone"
