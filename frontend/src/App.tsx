@@ -21,7 +21,7 @@ export const AppContext = createContext<{
   setShowError: (React.Dispatch<React.SetStateAction<boolean>> | Function),
   setError: (React.Dispatch<React.SetStateAction<string>> | Function),
   setLoading: (React.Dispatch<React.SetStateAction<boolean>> | Function),
-}>({ setShowError: () => { }, setError: () => { }, setLoading: () => { }  });
+}>({ setShowError: () => { }, setError: () => { }, setLoading: () => { } });
 
 
 function App() {
@@ -31,34 +31,34 @@ function App() {
 
   useEffect(() => {
     switch (true) {
-        case localStorage.getItem("themeKey") === "dark":
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem("themeKey", "dark");
-            break;
-        case localStorage.getItem("themeKey") === "light":
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem("themeKey", "light");
-            break;
-        case window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches:
-            document.documentElement.setAttribute('data-theme', 'dark');
-            localStorage.setItem("themeKey", "dark");
-            break;
-        default:
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem("themeKey", "light");
-            break;
+      case localStorage.getItem("themeKey") === "dark":
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem("themeKey", "dark");
+        break;
+      case localStorage.getItem("themeKey") === "light":
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem("themeKey", "light");
+        break;
+      case window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches:
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem("themeKey", "dark");
+        break;
+      default:
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem("themeKey", "light");
+        break;
     }
-}, []); //detect preffered color scheme
+  }, []); //detect preffered color scheme
 
 
   return (
     <Container fluid="true" className="main-container">
       <Router>
         <AppContext.Provider value={{ setShowError, setError, setLoading }}>
+          {loading && <Loader />}
           <div className='navbar'><Navbar /></div>
           <div className='header'><Header /></div>
           <div className="pageContainer">
-            {loading && <Loader />}
             {showError && <ErrorModal errorMessage={error} />}
             <Routes>
               <Route path="/" Component={LandingPage} />

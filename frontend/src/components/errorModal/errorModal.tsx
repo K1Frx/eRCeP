@@ -15,8 +15,8 @@ const ErrorModal: React.FC<ErrorModalProps> = ({ errorMessage }) => {
     const refresh = () => {setShowError(false); location.reload();};
     const mainMenuRoute = () => {setShowError(false); location.href = "/"};
     
-    return ( //TODO change setShowError(false) to refresh
-        <Modal show={true} onHide={setShowError(false)} centered className="modalContainer">
+    return (
+        <Modal show={true} onHide={refresh} centered className="modalContainer">
         <Modal.Header closeButton>
           <Modal.Title>Whoops!</Modal.Title>
         </Modal.Header>
