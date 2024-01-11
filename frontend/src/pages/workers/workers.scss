@@ -40,7 +40,10 @@
             border: none;
             background-color: var(--background-secondary);
             transition: all 0.2s ease-in-out;
-
+            &:focus {
+                background-color: var(--background-secondary);
+                border: none;
+            }
             &:hover {
                 scale: 1.05;
             }

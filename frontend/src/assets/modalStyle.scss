@@ -29,7 +29,10 @@
             font-size: 1.1rem;
             transition: all 0.2s ease-in-out;
             border: 0.1rem solid var(--secondary-text-color);
-
+            &:focus {
+                background-color: transparent;
+                border: 0.1rem solid var(--secondary-text-color);
+            }
             &:hover {
                 scale: 1.05;
             }
