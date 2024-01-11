@@ -6,6 +6,11 @@ import { useStorageState } from "../../hooks/useStorageState";
 import Table from "react-bootstrap/esm/Table";
 import { workerType } from "../../types/types";
 import EditWorkerModal from "./components/editWorkerModal";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
+import { customTooltip } from "../../components/smallComponents/smallComponents";
+import Button from "react-bootstrap/esm/Button";
 
 
 const Workers = () => {
@@ -68,15 +73,26 @@ const Workers = () => {
                             <td>{worker.birth_date}</td>
                             <td>{worker.email}</td>
                             <td>{worker.phone_number}</td>
-                            <td>Expand</td>
+                            <td><Button onClick={() => {alert("TODO expand")}}>Expand</Button></td>
                             {/* items have unused user value */}
                         </tr>
                     ))
                     }
                 </tbody>
             </Table>
+            <div className="footer">
+                <div className="pagination"/>
+                <OverlayTrigger placement="top" overlay={customTooltip("Create User")} delay={200}>
+                <button className="addButton" onClick={() => { setWorkerModalData(null); setShowModal(true) }}>
+                <FontAwesomeIcon icon={faPlus} className="addButtonIcon"/>
+                </button>
+                </OverlayTrigger>
+            </div>
         </div>
     );
 };
 
 export default Workers;
+
+
+  

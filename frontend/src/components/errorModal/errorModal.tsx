@@ -12,7 +12,7 @@ const ErrorModal: React.FC<ErrorModalProps> = ({ errorMessage }) => {
     const { setShowError } = useContext(AppContext);
     // const [show, setShow] = useState(false);
 
-    const refresh = () => {setShowError(false); location.reload();};
+    const refresh = () => {setShowError(false);}; // location.reload(); TODO
     const mainMenuRoute = () => {setShowError(false); location.href = "/"};
     
     return (

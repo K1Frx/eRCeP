@@ -11,10 +11,11 @@
     color: var(--primary-text-color);
 
     .error {
-        color: var(--red);
+        color: var(--error);
         display: flex;
         justify-content: center;
         align-items: center;
+        line-height: 0.5;
         // padding: 0.25rem;
     }
 

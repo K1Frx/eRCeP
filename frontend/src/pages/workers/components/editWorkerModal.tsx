@@ -9,6 +9,25 @@ import { workerType } from '../../../types/types';
 import Form from 'react-bootstrap/esm/Form';
 import "../../../assets/modalStyle.scss"
 import { Formik } from 'formik';
+import * as Yup from 'yup';
+import "../workers.scss"
+
+const workerSchema = Yup.object().shape({
+    first_name: Yup.string().required('Required'),
+    last_name: Yup.string().required('Required'),
+    email: Yup.string().email('Invalid email').required('Required'),
+    phone_number: Yup.string().matches(
+        /^\+.*/,
+        'Invalid phone number format. Use format: +999999999'
+    ).matches(
+        /^\+\d{9,15}$/,
+        'Invalid phone number format. Number must contain 9-15 digits'
+    ).required('Required'),
+    birth_date: Yup.string().matches(
+        /^\d{4}-\d{2}-\d{2}$/,
+        'Invalid date format. Please use YYYY-MM-DD'
+    ).required('Required'),
+});
 
 
 interface editWorkerModalProps {
@@ -22,13 +41,14 @@ const EditWorkerModal: React.FC<editWorkerModalProps> = ({ id, setShow, worker, 
     const { setShowError, setError, setLoading } = useContext(AppContext);
     let loginToken = useStorageState({ state: "loginToken" });
     const [disabled, setDisabled] = useState<boolean>(false);
+    const [deleteConfirmation, setDeleteConfirmation] = useState<boolean>(false);
     const defaultWorker: workerType = {
         birth_date: "",
         email: "",
         first_name: "",
         last_name: "",
         phone_number: "",
-      }
+    }
 
     const patchWorker = (values: workerType) => {
         setLoading(true);
@@ -50,29 +70,31 @@ const EditWorkerModal: React.FC<editWorkerModalProps> = ({ id, setShow, worker, 
                 setShowError(true);
                 setDisabled(false);
                 setLoading(false);
+                getWorkers();
             });
     }
 
-    const createWorker = () => {
+    const createWorker = (values: workerType) => {
         setLoading(true);
         setDisabled(true);
         axios
-            .post(`http://frxx.pythonanywhere.com/api/workers/`, {
+            .post(`http://frxx.pythonanywhere.com/api/workers/`, values, {
                 timeout: 5000,
                 headers: {
                     Authorization: `Bearer ${loginToken.store}`
                 }
             }).then((res) => {
-                // setWorkers(res.data.items);
-                console.log(res.data);
                 setDisabled(false);
                 setLoading(false);
+                setShow(false);
+                getWorkers();
             })
             .catch((err) => {
                 setError(err.message);
                 setShowError(true);
                 setDisabled(false);
                 setLoading(false);
+                getWorkers();
             });
     }
 
@@ -88,105 +110,130 @@ const EditWorkerModal: React.FC<editWorkerModalProps> = ({ id, setShow, worker, 
             }).then((res) => {
                 setDisabled(false);
                 setLoading(false);
+                setShow(false);
+                getWorkers();
             })
             .catch((err) => {
                 setError(err.message);
                 setShowError(true);
                 setDisabled(false);
                 setLoading(false);
+                getWorkers();
             });
     }
 
+    const deleteConfirmationModal = (
+        <Modal show={true} onHide={() => setDeleteConfirmation(false)} centered className='modalContainer deleteConfirmationModalContainer'>
+                <Modal.Header closeButton>
+                    <Modal.Title>Delete Worker</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    Are you sure you want to delete this worker?
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button disabled={disabled} type="button" onClick={() => {deleteWorker(id!); setDeleteConfirmation(false)}}>Delete Worker</Button>
+                </Modal.Footer>
+            </Modal>
+    )
+
     return (
-        <Modal show={true} onHide={() => setShow(false)} centered className='modalContainer'>
-            <Formik
-                enableReinitialize
-                initialValues={worker ?? defaultWorker}
-                // onSubmit={savePrice}
-                onSubmit={(values, helpers) => patchWorker(values)}
-            // onSubmit={(values, helpers) => { console.log(values) }}
-            // validationSchema={orderSchema}
-            >
-                {({
-                    handleSubmit,
-                    handleChange,
-                    handleBlur,
-                    values,
-                    // setFieldValue,
-                    // setFieldError,
-                    // touched,
-                    // errors
-                }) => (
-                    <Form noValidate onSubmit={handleSubmit}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Edit Worker</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
+        <div>
+            {deleteConfirmation && deleteConfirmationModal}
+            <Modal show={true} onHide={() => setShow(false)} centered className='modalContainer editWorkerModalContainer'>
+                <Formik
+                    enableReinitialize
+                    initialValues={worker ?? defaultWorker}
+                    validationSchema={workerSchema}
+                    // validateOnBlur={true}
+                    // validateOnChange={false}
+                    onSubmit={(values, helpers) => id ? patchWorker(values) : createWorker(values)}
+                >
+                    {({
+                        handleSubmit,
+                        handleChange,
+                        handleBlur,
+                        values,
+                        // setFieldValue,
+                        // setFieldError,
+                        touched,
+                        errors
+                    }) => (
+                        <Form noValidate onSubmit={handleSubmit}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>{id ? "Edit Worker" : "Create Worker"}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
 
-                            <Form.Group>
-                                {/* <Form.Label>Login</Form.Label> */}
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Name"
-                                    id="first_name"
-                                    value={values.first_name}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                {/* <Form.Label>Password</Form.Label> */}
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Surname"
-                                    id="last_name"
-                                    value={values.last_name}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                {/* <Form.Label>Password</Form.Label> */}
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Birth Date"
-                                    id="birth_date"
-                                    value={values.birth_date}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                {/* <Form.Label>Password</Form.Label> */}
-                                <Form.Control
-                                    type="email"
-                                    placeholder="Email"
-                                    id="email"
-                                    value={values.email}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </Form.Group>
-                            <Form.Group>
-                                {/* <Form.Label>Password</Form.Label> */}
-                                <Form.Control
-                                    type="text"
-                                    placeholder="phone"
-                                    id="phone_number"
-                                    value={values.phone_number}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-                            </Form.Group>
-
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button disabled={disabled} type="submit">Save Changes</Button>
-                        </Modal.Footer>
-                    </Form>
-                )}
-            </Formik>
-        </Modal>
+                                <Form.Group>
+                                    {/* <Form.Label>Login</Form.Label> */}
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Name"
+                                        id="first_name"
+                                        value={values.first_name}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.first_name && touched.first_name && <div className='validationError'>{errors.first_name}</div>}
+                                </Form.Group>
+                                <Form.Group>
+                                    {/* <Form.Label>Password</Form.Label> */}
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Surname"
+                                        id="last_name"
+                                        value={values.last_name}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.last_name && touched.last_name && <div className='validationError'>{errors.last_name}</div>}
+                                </Form.Group>
+                                <Form.Group>
+                                    {/* <Form.Label>Password</Form.Label> */}
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="Birth Date"
+                                        id="birth_date"
+                                        value={values.birth_date}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.birth_date && touched.birth_date && <div className='validationError'>{errors.birth_date}</div>}
+                                </Form.Group>
+                                <Form.Group>
+                                    {/* <Form.Label>Password</Form.Label> */}
+                                    <Form.Control
+                                        type="email"
+                                        placeholder="Email"
+                                        id="email"
+                                        value={values.email}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.email && touched.email && <div className='validationError'>{errors.email}</div>}
+                                </Form.Group>
+                                <Form.Group>
+                                    {/* <Form.Label>Password</Form.Label> */}
+                                    <Form.Control
+                                        type="text"
+                                        placeholder="phone"
+                                        id="phone_number"
+                                        value={values.phone_number}
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                    />
+                                    {errors.phone_number && touched.phone_number && <div className='validationError'>{errors.phone_number}</div>}
+                                </Form.Group>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                {id && <Button disabled={disabled} type="button" onClick={() => setDeleteConfirmation(true)}>Delete Worker</Button>}
+                                <Button disabled={disabled} type="submit">Save Changes</Button>
+                            </Modal.Footer>
+                        </Form>
+                    )}
+                </Formik>
+            </Modal>
+        </div>
     );
 };
 
