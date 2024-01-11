@@ -8,6 +8,8 @@
 
 body {
   overflow: auto;
+  background-color: var(--background-primary);
+
 }
 
 .container-fluid {
@@ -22,17 +24,9 @@ a {
 }
 
 .main-container {
-  background-color: var(--background-primary);
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
   display: grid;
   grid-template-columns: 15rem 1fr;
-  /* 15rem for the navbar, 1fr for the rest of the content */
   grid-template-rows: 4rem 1fr;
-  /* 5rem for the header, 1fr for the rest of the content */
-  // margin-left: var(--navbar-width);
   height: 100dvh;
 
   .app-container {

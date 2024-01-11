@@ -52,7 +52,7 @@ function Navbar() {
           <h1><FontAwesomeIcon icon={faClock} style={{ paddingRight: "1rem" }} />eRCeP</h1>
         </Link>
         <div className="menu-icon" onClick={handleClick}>
-          {click ? <FontAwesomeIcon icon={faXmark} style={{ color: "white" }} /> : <FontAwesomeIcon icon={faBars} style={{ color: "white" }} />}
+           <FontAwesomeIcon icon={click ? faXmark : faBars} style={{ color: "white" }} /> 
         </div>
         <div className="navbar-user">
           Hello, User

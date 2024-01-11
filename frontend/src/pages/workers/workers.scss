@@ -27,7 +27,7 @@
         td {
             color: var(--primary-text-color);
             background-color: inherit;
-            height: 5rem;
+            height: 3rem;
             vertical-align: middle;
             cursor: pointer;
 
@@ -70,6 +70,16 @@
         padding: 1rem;
         width: 100%;
         height: 100%;
+
+        .pagination {
+            .paginationButton{
+                border: none;
+                background-color:  var(--background-secondary);
+                &:hover {
+                    scale: 1.05;
+                }
+            }
+        }
 
 
         .addButton {

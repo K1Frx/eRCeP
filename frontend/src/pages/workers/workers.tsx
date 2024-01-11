@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import OverlayTrigger from "react-bootstrap/esm/OverlayTrigger";
 import { customTooltip } from "../../components/smallComponents/smallComponents";
 import Button from "react-bootstrap/esm/Button";
+import { date } from "yup";
+import usePagination from "../../hooks/usePagination";
 
 
 const Workers = () => {
@@ -45,6 +47,16 @@ const Workers = () => {
     useEffect(() => {
         getWorkers();
     }, []);
+    const [page, setPage] = useState(1);
+    const rowsPerPage = 10;
+    const { slice, range } = usePagination(workers, page, rowsPerPage);
+
+
+    useEffect(() => {
+        if (slice.length < 1 && page !== 1) {
+            setPage(page - 1);
+        }
+    }, [slice, page, setPage]);
 
     return (
         <div className="workersContainer">
@@ -73,7 +85,7 @@ const Workers = () => {
                             <td>{worker.birth_date}</td>
                             <td>{worker.email}</td>
                             <td>{worker.phone_number}</td>
-                            <td><Button onClick={(e) => {alert("TODO expand"); e.stopPropagation()}}>Expand</Button></td>
+                            <td><Button onClick={(e) => { alert("TODO expand"); e.stopPropagation() }}>Expand</Button></td>
                             {/* items have unused user value */}
                         </tr>
                     ))
@@ -81,11 +93,21 @@ const Workers = () => {
                 </tbody>
             </Table>
             <div className="footer">
-                <div className="pagination"/>
+                <div className="pagination">
+                    {range.map((el, index) => (
+                        <Button
+                            key={index}
+                            className="paginationButton"
+                            onClick={() => setPage(el)}
+                        >
+                            {el}
+                        </Button>
+                    ))}
+                </div>
                 <OverlayTrigger trigger={["hover"]} placement="top" overlay={customTooltip("Create Worker")} delay={200}>
-                <button className="addButton" onClick={() => { setWorkerModalData(null); setShowModal(true) }}>
-                <FontAwesomeIcon icon={faPlus} className="addButtonIcon"/>
-                </button>
+                    <button className="addButton" onClick={() => { setWorkerModalData(null); setShowModal(true) }}>
+                        <FontAwesomeIcon icon={faPlus} className="addButtonIcon" />
+                    </button>
                 </OverlayTrigger>
             </div>
         </div>
@@ -95,4 +117,3 @@ const Workers = () => {
 export default Workers;
 
 
-  
