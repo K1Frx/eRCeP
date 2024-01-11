@@ -11,6 +11,7 @@ import "../../../assets/modalStyle.scss"
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import "../workers.scss"
+import { smallModal } from '../../../components/smallComponents/smallComponents';
 
 const workerSchema = Yup.object().shape({
     first_name: Yup.string().required('Required'),
@@ -111,6 +112,7 @@ const EditWorkerModal: React.FC<editWorkerModalProps> = ({ id, setShow, worker, 
                 setDisabled(false);
                 setLoading(false);
                 setShow(false);
+                setDeleteConfirmation(false);
                 getWorkers();
             })
             .catch((err) => {
@@ -118,27 +120,25 @@ const EditWorkerModal: React.FC<editWorkerModalProps> = ({ id, setShow, worker, 
                 setShowError(true);
                 setDisabled(false);
                 setLoading(false);
+                setDeleteConfirmation(false);
                 getWorkers();
             });
     }
 
-    const deleteConfirmationModal = (
-        <Modal show={true} onHide={() => setDeleteConfirmation(false)} centered className='modalContainer deleteConfirmationModalContainer'>
-                <Modal.Header closeButton>
-                    <Modal.Title>Delete Worker</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    Are you sure you want to delete this worker?
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button disabled={disabled} type="button" onClick={() => {deleteWorker(id!); setDeleteConfirmation(false)}}>Delete Worker</Button>
-                </Modal.Footer>
-            </Modal>
-    )
-
     return (
         <div>
-            {deleteConfirmation && deleteConfirmationModal}
+            {/* {deleteConfirmation && deleteConfirmationModal} */}
+            {deleteConfirmation &&
+                smallModal(
+                    {
+                        onHideFunction: () => setDeleteConfirmation(false),
+                        onClickFunction: () => deleteWorker(id ?? 0),
+                        title: "Delete Worker",
+                        text: "Are you sure you want to delete this worker?",
+                        buttonText: "Delete",
+                        disabled: disabled
+                    })
+            }
             <Modal show={true} onHide={() => setShow(false)} centered className='modalContainer editWorkerModalContainer'>
                 <Formik
                     enableReinitialize
