@@ -118,7 +118,7 @@ function Navbar() {
             <button
               disabled={!loginToken.store || disabled}
               className="nav-links logout-button"
-              onClick={() => setLogoutConfirmation(true)}
+              onClick={() => {closeMobileMenu(); setLogoutConfirmation(true)}}
             >
               <FontAwesomeIcon icon={faRightFromBracket} />
             </button>
