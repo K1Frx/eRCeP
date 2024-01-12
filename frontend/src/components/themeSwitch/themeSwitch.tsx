@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './themeSwitch.scss'
+import Form from 'react-bootstrap/esm/Form';
 
 export default function ThemeSwitch() {
 
@@ -27,9 +28,16 @@ export default function ThemeSwitch() {
 
     return (
         <div className='themeSwitchContainer'>
-        <button onClick={toggleTheme} className="themeSwitch">
-            {theme === "light" ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />} Change Theme
-        </button>
+            <Form.Check
+                type="switch"
+                id="theme-switch"
+                label="Dark Theme"
+                checked={theme === "dark"}
+                onChange={toggleTheme}
+            />
+            {/* <button onClick={toggleTheme} className="themeSwitch">
+                {theme === "light" ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />} Change Theme
+            </button> */}
         </div>
     )
 }
