@@ -22,29 +22,6 @@ const Workers = () => {
 
     const [workers, setWorkers] = useState<workerType[]>([]);
     const [showModal, setShowModal] = useState(false);
-
-    // const [search, setSearch] = useState("");
-    // const [filteredWorkers, setFilteredWorkers] = useState<workerType[] | null>(null); 
-    // const handleSearch = (e:any) => {
-    //     setSearch(e.target.value);
-    // };
-
-    // useEffect(() => {
-    //     const filterWorkers = () => {
-    //         if (search.trim() === '') {
-    //             setFilteredWorkers(workers); // Show all workers when search is empty
-    //         } else {
-    //             setFilteredWorkers(workers.filter((entry) =>
-    //                 Object.values(entry).some(val =>
-    //                     typeof val === "string" && val.toLowerCase().includes(search.toLowerCase())
-    //                 )
-    //             ));
-    //         }
-    //     };
-
-    //     // Call the filter function when the search term changes
-    //     filterWorkers();
-    // }, [search, workers]);
     const { search, handleSearch, filteredData } = useSearch(workers);
 
     const tableHeaders = ["ID", "Name", "Surname", "Birth date", "Email", "Phone", "Contracts"];

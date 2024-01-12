@@ -89,9 +89,9 @@
             vertical-align: middle;
             cursor: pointer;
 
-            &:last-child {
-                text-align: center;
-            }
+            // &:last-child {
+            //     text-align: center;
+            // } //if you want expand button centered in cell
         }
 
         th:nth-child(1),

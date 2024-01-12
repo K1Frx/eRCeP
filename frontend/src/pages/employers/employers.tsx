@@ -8,6 +8,10 @@ import Table from "react-bootstrap/esm/Table";
 import EditEmployerModal from "./components/editEmployerModal";
 import { employerType } from "../../types/types";
 import { EmployerTableFooter } from "./components/employerTableFooter";
+import useSearch from "../../hooks/useSearch";
+import Form from "react-bootstrap/esm/Form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 
 const Employers = () => {
     const { setShowError, setError, setLoading } = useContext(AppContext);
@@ -16,6 +20,7 @@ const Employers = () => {
 
     const [employers, setEmployers] = useState<employerType[]>([]);
     const [showModal, setShowModal] = useState(false);
+    const { search, handleSearch, filteredData } = useSearch(employers);
 
     const tableHeaders = ["ID", "Name", "NIP", "Address"];
 
@@ -63,6 +68,16 @@ const Employers = () => {
                     getEmployers={getEmployers}
                 />
             }
+                        <div className="searchContainer">
+                <Form.Control
+                    type="text"
+                    placeholder={`Search`}
+                    value={search}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    className="searchBar"
+                />
+                <FontAwesomeIcon icon={faSearch} className="searchIcon"/>
+            </div>
             <Table >
                 <thead>
                     <tr className="tableHeader">
@@ -72,7 +87,7 @@ const Employers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {employers.map((employer, index) => (
+                    {filteredData.map((employer, index) => (
                         <tr key={index} onClick={() => { setEmployerModalData(employer); setShowModal(true) }}>
                             <td>{employer.id}</td>
                             <td>{employer.name}</td>
