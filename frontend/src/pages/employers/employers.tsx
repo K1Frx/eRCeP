@@ -5,7 +5,6 @@ import axios from "axios";
 import usePagination from "../../hooks/usePagination";
 import { useStorageState } from "../../hooks/useStorageState";
 import Table from "react-bootstrap/esm/Table";
-import Button from "react-bootstrap/esm/Button";
 import EditEmployerModal from "./components/editEmployerModal";
 import { employerType } from "../../types/types";
 import { EmployerTableFooter } from "./components/employerTableFooter";

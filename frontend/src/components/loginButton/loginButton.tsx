@@ -3,12 +3,10 @@ import { useContext, useState } from "react";
 import { AppContext } from "../../App";
 import { useStorageState } from "../../hooks/useStorageState";
 import { Form } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const LoginButton = () => {
-    const navigate = useNavigate();
-    const { setShowError, setError, setLoading } = useContext(AppContext);
+    const { setError, setLoading } = useContext(AppContext);
     let loginToken = useStorageState({ state: "loginToken" });
     const [disabled, setDisabled] = useState<boolean>(false);
     const [login, setLogin] = useState<string>("");

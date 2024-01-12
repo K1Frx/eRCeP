@@ -1,7 +1,4 @@
-import { useContext } from "react";
-import { AppContext } from "../../App";
 import "./about.scss";
-import LoginButton from "../../components/loginButton/loginButton";
 
 const About = () => {
     return (

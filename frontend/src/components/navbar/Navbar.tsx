@@ -9,8 +9,6 @@ import { faGear } from "@fortawesome/free-solid-svg-icons/faGear";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFromBracket";
 import { AppContext } from "../../App";
 import { useStorageState } from "../../hooks/useStorageState";
-import Modal from "react-bootstrap/esm/Modal";
-import Button from "react-bootstrap/esm/Button";
 import { smallModal } from "../smallComponents/smallComponents";
 
 function Navbar() {
