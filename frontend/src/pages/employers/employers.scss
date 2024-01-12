@@ -78,7 +78,7 @@
                 --bs-form-select-bg-img: var(--select-arrow-img);
 
                 &:focus {
-                    box-shadow: none !important;
+                    box-shadow: none;
                 }
             }
 

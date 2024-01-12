@@ -11,8 +11,63 @@
     padding: 2rem;
     white-space: nowrap;
 
+
+    .searchContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        align-items: center;
+        // width: 100%;
+        // height: 3.75rem;
+        // padding: 0.5rem 2rem;
+        border: 0.1rem solid transparent;
+        // background-color: var(--buttonPrimaryColor);
+        border-radius: 1.5rem;
+        outline: none;
+        color: var(--primary-text-color);
+        position: relative;
+
+        // transition: all 0.2s ease-in-out;
+
+        .searchBar {
+            width: 100%;
+            // transition: all 0.2s ease-in-out;
+            border: 0.05rem solid var(--background-secondary);
+            background-color: var(--background-primary);
+            color: var(--primary-text-color);
+
+
+            &:focus {
+                box-shadow: none;
+            }
+
+            &::placeholder {
+                color: var(--primary-text-color);
+                opacity: 0.5;
+            }
+        }
+
+        @media screen and (max-width: consts.$mobile-width) {
+            margin: 0.25rem;
+        }
+
+        .searchIcon {
+            opacity: 0.5;
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            /* Adjust the right distance as needed */
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+    }
+
+
     .table {
         display: table;
+        width: 100%;
+        /* Set the table width */
+        table-layout: fixed;
 
         tr:not(.tableHeader) {
             &:hover {
@@ -26,6 +81,8 @@
         }
 
         td {
+            overflow: hidden;
+            text-overflow: ellipsis;
             color: var(--primary-text-color);
             background-color: inherit;
             height: 3rem;
@@ -35,6 +92,16 @@
             &:last-child {
                 text-align: center;
             }
+        }
+
+        th:nth-child(1),
+        td:nth-child(1) {
+            width: 8%;
+        }
+
+        th:nth-child(5),
+        td:nth-child(5) {
+            width: 23%;
         }
 
         .btn {
@@ -78,7 +145,7 @@
                 --bs-form-select-bg-img: var(--select-arrow-img);
 
                 &:focus {
-                    box-shadow: none !important;
+                    box-shadow: none;
                 }
             }
 
@@ -171,6 +238,7 @@
                 margin: 0;
             }
         }
+
         .groupError {
             // padding: 0.1rem 0 0 0;
             background-color: rgba(var(--error-rgb), 0.25);

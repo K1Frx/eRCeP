@@ -9,6 +9,10 @@ import EditWorkerModal from "./components/editWorkerModal";
 import Button from "react-bootstrap/esm/Button";
 import usePagination from "../../hooks/usePagination";
 import { WorkerTableFooter } from "./components/workerTableFooter";
+import Form from "react-bootstrap/esm/Form";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
+import useSearch from "../../hooks/useSearch";
 
 
 const Workers = () => {
@@ -18,6 +22,30 @@ const Workers = () => {
 
     const [workers, setWorkers] = useState<workerType[]>([]);
     const [showModal, setShowModal] = useState(false);
+
+    // const [search, setSearch] = useState("");
+    // const [filteredWorkers, setFilteredWorkers] = useState<workerType[] | null>(null); 
+    // const handleSearch = (e:any) => {
+    //     setSearch(e.target.value);
+    // };
+
+    // useEffect(() => {
+    //     const filterWorkers = () => {
+    //         if (search.trim() === '') {
+    //             setFilteredWorkers(workers); // Show all workers when search is empty
+    //         } else {
+    //             setFilteredWorkers(workers.filter((entry) =>
+    //                 Object.values(entry).some(val =>
+    //                     typeof val === "string" && val.toLowerCase().includes(search.toLowerCase())
+    //                 )
+    //             ));
+    //         }
+    //     };
+
+    //     // Call the filter function when the search term changes
+    //     filterWorkers();
+    // }, [search, workers]);
+    const { search, handleSearch, filteredData } = useSearch(workers);
 
     const tableHeaders = ["ID", "Name", "Surname", "Birth date", "Email", "Phone", "Contracts"];
 
@@ -64,6 +92,16 @@ const Workers = () => {
                     getWorkers={getWorkers}
                 />
             }
+            <div className="searchContainer">
+                <Form.Control
+                    type="text"
+                    placeholder={`Search`}
+                    value={search}
+                    onChange={(e) => handleSearch(e.target.value)}
+                    className="searchBar"
+                />
+                <FontAwesomeIcon icon={faSearch} className="searchIcon"/>
+            </div>
             <Table >
                 <thead>
                     <tr className="tableHeader">
@@ -73,7 +111,7 @@ const Workers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {workers.map((worker, index) => (
+                    {filteredData.map((worker, index) => (
                         <tr key={index} onClick={() => { setWorkerModalData(worker); setShowModal(true) }}>
                             <td>{worker.id}</td>
                             <td>{worker.first_name}</td>
