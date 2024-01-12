@@ -1,12 +1,14 @@
 @use "./assets/consts";
+@import url('https://fonts.googleapis.com/css2?family=Source%20Sans%20Pro:wght@400&display=swap');
+
 
 * {
   box-sizing: border-box;
-  font-family: 'Urbane';
   margin: 0;
 }
 
 body {
+  font-family: 'Source Sans Pro', sans-serif;
   overflow: auto;
   background-color: var(--background-primary);
 
