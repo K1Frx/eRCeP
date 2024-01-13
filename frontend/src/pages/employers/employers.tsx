@@ -25,7 +25,7 @@ const Employers = () => {
     const [showModal, setShowModal] = useState(false);
     const { search, handleSearch, filteredData } = useSearch(employers);
 
-    const tableHeaders = ["ID", "Name", "NIP", "Address", "Contracts"];
+    const tableHeaders = ["ID", "Name", "NIP", "Address"];
 
     const getEmployers = () => {
         setLoading(true);
@@ -95,7 +95,6 @@ const Employers = () => {
                             <td>{employer.name}</td>
                             <td>{employer.nip}</td>
                             <td>{employer.adress}</td>
-                            <td><Button onClick={(e) => { navigate("/contracts"); alert("contracts search not fully implemented"); e.stopPropagation() }}>Expand</Button></td>
                         </tr>
                     ))
                     }
