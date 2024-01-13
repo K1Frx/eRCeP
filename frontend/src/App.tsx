@@ -16,6 +16,7 @@ import { useStorageState } from './hooks/useStorageState';
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.scss';
 import ErrorModal from './components/errorModal/errorModal';
+import Contracts from './pages/contracts/contracts';
 
 export const AppContext = createContext<{
   setShowError: (React.Dispatch<React.SetStateAction<boolean>> | Function),
@@ -67,6 +68,7 @@ function App() {
               <Route element={<ProtectedRoute />}>
                 <Route path="/admin" element={<Admin />} />
                 <Route path="/employers" element={<Employers />} />
+                <Route path="/contracts" element={<Contracts />} />
                 <Route path="/timesheets" element={<Timesheets />} />
                 <Route path="/workers" element={<Workers />} />
               </Route>

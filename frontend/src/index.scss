@@ -107,3 +107,18 @@ input, select {
 // th{
 //   background-color: #45a049;
 // }
+
+//bootstrap override
+
+.form-control {
+  // border-color: var(--background-secondary) !important;
+  // &:checked{
+  //     background-color: var(--background-secondary) !important;
+  //     border-color: var(--background-secondary) !important;
+  
+  // }
+  &:focus {
+      box-shadow: none !important;
+      border-color: var(--background-secondary) !important;
+  }
+}

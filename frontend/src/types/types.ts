@@ -15,3 +15,11 @@ export interface employerType {
   nip: string;
   adress: string | null;
 }
+
+export interface contractType {
+  id?: number;
+  worker: number | string;
+  employer: number | string;
+  date_start: string;
+  date_end?: string;
+}

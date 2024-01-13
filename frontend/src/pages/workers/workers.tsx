@@ -35,6 +35,7 @@ const Workers = () => {
                     Authorization: `Bearer ${loginToken.store}`
                 }
             }).then((res) => {
+
                 setWorkers(res.data.items);
                 setLoading(false);
             })

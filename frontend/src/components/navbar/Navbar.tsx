@@ -75,7 +75,6 @@ function Navbar() {
             Workers
           </Link>
         </div>
-        <>
           <div className="nav-item">
             <Link
               to="/employers"
@@ -85,7 +84,15 @@ function Navbar() {
               Employers
             </Link>
           </div>
-        </>
+          <div className="nav-item">
+            <Link
+              to="/contracts"
+              className="nav-links"
+              onClick={closeMobileMenu}
+            >
+              Contracts
+            </Link>
+          </div>
         <div className="nav-item">
           <Link
             to="/admin"

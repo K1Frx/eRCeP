@@ -33,7 +33,6 @@ const Employers = () => {
                     Authorization: `Bearer ${loginToken.store}`
                 }
             }).then((res) => {
-                console.log(res.data);
                 setEmployers(res.data.items);
                 setLoading(false);
             })

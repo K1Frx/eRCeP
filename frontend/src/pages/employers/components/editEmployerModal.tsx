@@ -176,7 +176,7 @@ const EditEmployerModal = ({ id, setShow, employer, getEmployers }: editEmployer
                                     {errors.nip && touched.nip && <div className='validationError'>{errors.nip}</div>}
                                 </Form.Group>
                                 <Form.Group className={`formGroup ${errors.adress && touched.adress && "groupError"}`}>
-                                    <Form.Label>Adsress</Form.Label>
+                                    <Form.Label>Address</Form.Label>
                                     <Form.Control
                                         type="text"
                                         placeholder="Adsress"
