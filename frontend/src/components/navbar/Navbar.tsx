@@ -10,8 +10,10 @@ import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons/faRightFro
 import { AppContext } from "../../App";
 import { useStorageState } from "../../hooks/useStorageState";
 import { smallModal } from "../smallComponents/smallComponents";
+import { useTranslation } from "react-i18next";
 
 function Navbar() {
+  const [t] = useTranslation();
   const { setLoading } = useContext(AppContext);
   let loginToken = useStorageState({ state: "loginToken" });
   const [disabled, setDisabled] = useState<boolean>(false);
@@ -53,7 +55,7 @@ function Navbar() {
            <FontAwesomeIcon icon={click ? faXmark : faBars} style={{ color: "white" }} /> 
         </div>
         <div className="navbar-user">
-          Hello, User
+          {t("navbar.helloUser")}
         </div>
       </div>
       <div className={click ? "nav-menu active" : "nav-menu"}>
@@ -63,7 +65,7 @@ function Navbar() {
             className="nav-links"
             onClick={closeMobileMenu}
           >
-            Timesheets
+            {t("navbar.timesheets")}
           </Link>
         </div>
         <div className="nav-item">
@@ -72,7 +74,7 @@ function Navbar() {
             className="nav-links"
             onClick={closeMobileMenu}
           >
-            Workers
+            {t("navbar.workers")}
           </Link>
         </div>
           <div className="nav-item">
@@ -81,7 +83,7 @@ function Navbar() {
               className="nav-links"
               onClick={closeMobileMenu}
             >
-              Employers
+              {t("navbar.employers")}
             </Link>
           </div>
           <div className="nav-item">
@@ -90,7 +92,7 @@ function Navbar() {
               className="nav-links"
               onClick={closeMobileMenu}
             >
-              Contracts
+              {t("navbar.contracts")}
             </Link>
           </div>
         <div className="nav-item">
@@ -99,7 +101,7 @@ function Navbar() {
             className="nav-links"
             onClick={closeMobileMenu}
           >
-            Admin
+            {t("navbar.admin")}
           </Link>
         </div>
         <div className="nav-item">
@@ -108,7 +110,7 @@ function Navbar() {
             className="nav-links"
             onClick={closeMobileMenu}
           >
-            About
+            {t("navbar.about")}
           </Link>
         </div>
         <div className="nav-item">

@@ -3,9 +3,10 @@ import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './themeSwitch.scss'
 import Form from 'react-bootstrap/esm/Form';
+import { useTranslation } from 'react-i18next';
 
 export default function ThemeSwitch() {
-
+    const [t] = useTranslation();
     const [theme, setTheme] = useState<string>((localStorage.getItem("themeKey") ?? document.documentElement.getAttribute('data-theme')) ?? 'light');
 
     const toggleTheme = () => {
@@ -28,10 +29,11 @@ export default function ThemeSwitch() {
 
     return (
         <div className='themeSwitchContainer'>
+            {t("settings.darkTheme")}
             <Form.Check
                 type="switch"
                 id="theme-switch"
-                label="Dark Theme"
+                // label=
                 checked={theme === "dark"}
                 onChange={toggleTheme}
             />

@@ -1,0 +1,26 @@
+{
+  "header": {
+    "welcome": "Welcome",
+    "timesheets": "TimeSheets",
+    "workers": "Workers",
+    "employers": "Employers",
+    "contracts": "Contracts",
+    "admin": "Admin",
+    "about": "About",
+    "settings": "Settings"
+  },
+  "navbar": {
+    "welcome": "Welcome",
+    "timesheets": "TimeSheets",
+    "workers": "Workers",
+    "employers": "Employers",
+    "contracts": "Contracts",
+    "admin": "Admin",
+    "about": "About",
+    "helloUser": "Hello, User"
+  },  
+  "settings": {
+    "languageSelect": "Select language",
+    "darkTheme": "Dark theme"
+  }
+}
