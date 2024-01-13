@@ -12,8 +12,11 @@ import useSearch from "../../hooks/useSearch";
 import Form from "react-bootstrap/esm/Form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
+import Button from "react-bootstrap/esm/Button";
+import { useNavigate } from "react-router-dom";
 
 const Employers = () => {
+    const navigate = useNavigate();
     const { setShowError, setError, setLoading } = useContext(AppContext);
     let loginToken = useStorageState({ state: "loginToken" });
     const [employerModalData, setEmployerModalData] = useState<employerType | null>(null);
@@ -22,7 +25,7 @@ const Employers = () => {
     const [showModal, setShowModal] = useState(false);
     const { search, handleSearch, filteredData } = useSearch(employers);
 
-    const tableHeaders = ["ID", "Name", "NIP", "Address"];
+    const tableHeaders = ["ID", "Name", "NIP", "Address", "Contracts"];
 
     const getEmployers = () => {
         setLoading(true);
@@ -92,9 +95,7 @@ const Employers = () => {
                             <td>{employer.name}</td>
                             <td>{employer.nip}</td>
                             <td>{employer.adress}</td>
-                            {/* <td>{employer.email}</td>
-                            <td>{employer.phone_number}</td>
-                            <td><Button onClick={(e) => { alert("TODO expand"); e.stopPropagation() }}>Expand</Button></td> */}
+                            <td><Button onClick={(e) => { navigate("/contracts"); alert("contracts search not fully implemented"); e.stopPropagation() }}>Expand</Button></td>
                         </tr>
                     ))
                     }
