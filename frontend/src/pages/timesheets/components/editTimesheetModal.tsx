@@ -5,28 +5,28 @@ import Modal from 'react-bootstrap/esm/Modal';
 import { AppContext } from '../../../App';
 import { useStorageState } from '../../../hooks/useStorageState';
 import axios from 'axios';
-import { workerType } from '../../../types/types';
+import { timesheetType } from '../../../types/types';
 import Form from 'react-bootstrap/esm/Form';
 import "../../../assets/modalStyle.scss"
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import "../workers.scss"
+import "../timesheets.scss"
 import { smallModal } from '../../../components/smallComponents/smallComponents';
 
-const workerSchema = Yup.object().shape({
+const timesheetSchema = Yup.object().shape({
     first_name: Yup.string().required('Required'),
     last_name: Yup.string().required('Required'),
     email: Yup.string().email('Invalid email').matches(
         /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
         'Invalid email'
-    ),
+    ).required('Required'),
     phone_number: Yup.string().matches(
         /^\+.*/,
         'Invalid phone number format. Use format: +999999999'
     ).matches(
         /^\+\d{9,15}$/,
         'Invalid phone number format. Number must contain 9-15 digits'
-    ),
+    ).required('Required'),
     birth_date: Yup.string().matches(
         /^\d{4}-\d{2}-\d{2}$/,
         'Invalid date format. Please use YYYY-MM-DD'
@@ -34,31 +34,32 @@ const workerSchema = Yup.object().shape({
 });
 
 
-interface editWorkerModalProps {
+interface editTimesheetModalProps {
     id: number | null;
     setShow: Dispatch<React.SetStateAction<boolean>>;
-    worker: workerType | null;
-    getWorkers: () => void;
+    timesheet: timesheetType | null;
+    getTimesheets: () => void;
 }
 
-const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalProps) => {
+const EditTimesheetModal = ({ id, setShow, timesheet, getTimesheets }: editTimesheetModalProps) => {
     const { setShowError, setError, setLoading } = useContext(AppContext);
     let loginToken = useStorageState({ state: "loginToken" });
     const [disabled, setDisabled] = useState<boolean>(false);
     const [deleteConfirmation, setDeleteConfirmation] = useState<boolean>(false);
-    const defaultWorker: workerType = {
-        birth_date: "",
-        email: "",
-        first_name: "",
-        last_name: "",
-        phone_number: "",
-    }
+    const defaultTimesheet: timesheetType = {
+        type: 0,
+        worker: 0,
+        date: "",
+        start_time: "",
+        end_time: "",
+        sum_min: 0,
+    } // TODO change types for correct ones
 
-    const patchWorker = (values: workerType) => {
+    const patchTimesheet = (values: timesheetType) => {
         setLoading(true);
         setDisabled(true);
         axios
-            .patch(`http://frxx.pythonanywhere.com/api/workers/${id}/`, values, {
+            .patch(`http://frxx.pythonanywhere.com/api/timesheets/${id}/`, values, {
                 timeout: 5000,
                 headers: {
                     Authorization: `Bearer ${loginToken.store}`
@@ -67,22 +68,22 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                 setDisabled(false);
                 setLoading(false);
                 setShow(false);
-                getWorkers();
+                getTimesheets();
             })
             .catch((err) => {
                 setError(err.message);
                 setShowError(true);
                 setDisabled(false);
                 setLoading(false);
-                getWorkers();
+                getTimesheets();
             });
     }
 
-    const createWorker = (values: workerType) => {
+    const createTimesheet = (values: timesheetType) => {
         setLoading(true);
         setDisabled(true);
         axios
-            .post(`http://frxx.pythonanywhere.com/api/workers/`, values, {
+            .post(`http://frxx.pythonanywhere.com/api/timesheets/`, values, {
                 timeout: 5000,
                 headers: {
                     Authorization: `Bearer ${loginToken.store}`
@@ -91,22 +92,22 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                 setDisabled(false);
                 setLoading(false);
                 setShow(false);
-                getWorkers();
+                getTimesheets();
             })
             .catch((err) => {
                 setError(err.message);
                 setShowError(true);
                 setDisabled(false);
                 setLoading(false);
-                getWorkers();
+                getTimesheets();
             });
     }
 
-    const deleteWorker = (id: number) => {
+    const deleteTimesheet = (id: number) => {
         setLoading(true);
         setDisabled(true);
         axios
-            .delete(`http://frxx.pythonanywhere.com/api/workers/${id}/`, {
+            .delete(`http://frxx.pythonanywhere.com/api/timesheets/${id}/`, {
                 timeout: 5000,
                 headers: {
                     Authorization: `Bearer ${loginToken.store}`
@@ -116,7 +117,7 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                 setLoading(false);
                 setShow(false);
                 setDeleteConfirmation(false);
-                getWorkers();
+                getTimesheets();
             })
             .catch((err) => {
                 setError(err.message);
@@ -124,7 +125,7 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                 setDisabled(false);
                 setLoading(false);
                 setDeleteConfirmation(false);
-                getWorkers();
+                getTimesheets();
             });
     }
 
@@ -135,21 +136,21 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                 smallModal(
                     {
                         onHideFunction: () => setDeleteConfirmation(false),
-                        onClickFunction: () => deleteWorker(id ?? 0),
-                        title: "Delete Worker",
-                        text: "Are you sure you want to delete this worker?",
+                        onClickFunction: () => deleteTimesheet(id ?? 0),
+                        title: "Delete Timesheet",
+                        text: "Are you sure you want to delete this timesheet?",
                         buttonText: "Delete",
                         disabled: disabled
                     })
             }
-            <Modal show={true} onHide={() => setShow(false)} centered className='modalContainer editWorkerModalContainer'>
+            <Modal show={true} onHide={() => setShow(false)} centered className='modalContainer editTimesheetModalContainer'>
                 <Formik
                     enableReinitialize
-                    initialValues={worker ?? defaultWorker}
-                    validationSchema={workerSchema}
+                    initialValues={timesheet ?? defaultTimesheet}
+                    validationSchema={timesheetSchema}
                     // validateOnBlur={true}
                     // validateOnChange={false}
-                    onSubmit={(values, helpers) => id ? patchWorker(values) : createWorker(values)}
+                    onSubmit={(values, helpers) => id ? patchTimesheet(values) : createTimesheet(values)}
                 >
                     {({
                         handleSubmit,
@@ -163,11 +164,11 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                     }) => (
                         <Form noValidate onSubmit={handleSubmit}>
                             <Modal.Header closeButton>
-                                <Modal.Title>{id ? "Edit Worker" : "Create Worker"}</Modal.Title>
+                                <Modal.Title>{id ? "Edit Timesheet" : "Create Timesheet"}</Modal.Title>
                             </Modal.Header>
                             <Modal.Body>
 
-                                <Form.Group className={`formGroup ${errors.first_name && touched.first_name && "groupError"}`}>
+                                {/* <Form.Group className={`formGroup ${errors.first_name && touched.first_name && "groupError"}`}>
                                     <Form.Label>Name</Form.Label>
                                     <Form.Control
                                         type="text"
@@ -226,10 +227,10 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
                                         onBlur={handleBlur}
                                     />
                                     {errors.phone_number && touched.phone_number && <div className='validationError'>{errors.phone_number}</div>}
-                                </Form.Group>
+                                </Form.Group> */}
                             </Modal.Body>
                             <Modal.Footer>
-                                {id && <Button disabled={disabled} type="button" onClick={() => setDeleteConfirmation(true)}>Delete Worker</Button>}
+                                {id && <Button disabled={disabled} type="button" onClick={() => setDeleteConfirmation(true)}>Delete Timesheet</Button>}
                                 <Button disabled={disabled} type="submit">Save Changes</Button>
                             </Modal.Footer>
                         </Form>
@@ -240,4 +241,4 @@ const EditWorkerModal = ({ id, setShow, worker, getWorkers }: editWorkerModalPro
     );
 };
 
-export default EditWorkerModal;
+export default EditTimesheetModal;

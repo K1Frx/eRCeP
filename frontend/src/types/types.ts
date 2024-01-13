@@ -23,3 +23,12 @@ export interface contractType {
   date_start: string;
   date_end?: string;
 }
+
+export interface timesheetType {
+  type: number;
+  worker: number;
+  date: string;
+  end_time: string | null;
+  start_time: string | null;
+  sum_min: number | null;
+}

@@ -8,9 +8,10 @@ interface SearchHookResult<T> {
 }
 
 const useSearch = <T extends Record<string, any>>(
-  initialData: T[]
+  initialData: T[],
+  defaultSearch: string = ''
 ): SearchHookResult<T> => {
-  const [search, setSearch] = useState<string>('');
+  const [search, setSearch] = useState<string>(defaultSearch);
   const [filteredData, setFilteredData] = useState<T[]>(initialData);
 
   useEffect(() => {
@@ -39,7 +40,7 @@ const useSearch = <T extends Record<string, any>>(
   };
 
   const resetSearch = () => {
-    setSearch('');
+    setSearch(defaultSearch);
   };
 
   return {

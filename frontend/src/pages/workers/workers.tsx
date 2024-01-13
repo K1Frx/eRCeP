@@ -13,10 +13,13 @@ import Form from "react-bootstrap/esm/Form";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 import useSearch from "../../hooks/useSearch";
+import { useNavigate } from "react-router-dom";
+
 
 
 const Workers = () => {
-    const { setShowError, setError, setLoading } = useContext(AppContext);
+    const navigate = useNavigate();
+        const { setShowError, setError, setLoading } = useContext(AppContext);
     let loginToken = useStorageState({ state: "loginToken" });
     const [workerModalData, setWorkerModalData] = useState<workerType | null>(null);
 
@@ -97,7 +100,7 @@ const Workers = () => {
                             <td>{worker.birth_date}</td>
                             <td>{worker.email}</td>
                             <td>{worker.phone_number}</td>
-                            <td><Button onClick={(e) => { alert("TODO expand"); e.stopPropagation() }}>Expand</Button></td>
+                            <td><Button onClick={(e) => { navigate("/contracts"); alert("contracts search not fully implemented"); e.stopPropagation() }}>Expand</Button></td>
                             {/* items have unused user value */}
                         </tr>
                     ))
