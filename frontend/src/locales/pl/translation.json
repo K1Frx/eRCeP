@@ -1,0 +1,26 @@
+{
+  "header": {
+    "welcome": "Dzień dobry",
+    "timesheets": "Ewidencja",
+    "workers": "Pracownicy",
+    "employers": "Pracodawcy",
+    "contracts": "Umowy",
+    "admin": "Admin",
+    "about": "O nas",
+    "settings": "Ustawienia"
+  },
+  "navbar": {
+    "welcome": "Dzień dobry",
+    "timesheets": "Ewidencja",
+    "workers": "Pracownicy",
+    "employers": "Pracodawcy",
+    "contracts": "Umowy",
+    "admin": "Admin",
+    "about": "O nas",
+    "helloUser": "Witaj, Użytkowniku"
+  },
+  "settings": {
+    "languageSelect": "Wybierz język",
+    "darkTheme": "Ciemny motyw"
+  }
+}

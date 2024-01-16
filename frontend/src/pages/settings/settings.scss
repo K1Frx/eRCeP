@@ -1,0 +1,20 @@
+@use "../../assets/consts";
+
+.settingsContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    gap: 2rem;
+    margin: 2rem;
+
+    button {
+        min-width: 18rem;
+    }
+
+    @media screen and (max-width: consts.$mobile-width) {
+        margin: 2rem 0;
+        justify-content: center;
+        align-items: center;
+    }
+}

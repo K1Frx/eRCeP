@@ -1,0 +1,22 @@
+.languageSwitchContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // gap: 1rem;
+    color: var(--background-secondary);
+    font-size: 2rem;
+    
+    .form-check-input {
+        border-color: var(--background-secondary);
+        &:checked{
+            background-color: var(--background-secondary);
+            border-color: var(--background-secondary);
+        
+        }
+        &:focus {
+            box-shadow: none;
+            border-color: var(--background-secondary);
+        }
+    }
+}

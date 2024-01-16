@@ -1,0 +1,124 @@
+@use "./assets/consts";
+@import url('https://fonts.googleapis.com/css2?family=Source%20Sans%20Pro:wght@400&display=swap');
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  overflow: auto;
+  background-color: var(--background-primary);
+
+}
+
+.container-fluid {
+  padding-left: 0rem !important;
+  padding-right: 0rem !important;
+  overflow: hidden;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+.main-container {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  grid-template-rows: 4rem 1fr;
+  height: 100dvh;
+
+  .app-container {
+    grid-template-columns: 15rem 1fr; /* 15rem for the navbar, 1fr for the rest of the content */
+    grid-template-rows: 5rem 1fr; /* 5rem for header, 1fr for content */
+  }
+
+  .navbar {
+    grid-column: 1; /* Occupy the first column */
+    grid-row: 1 / span 2; /* Span across both rows in the first column */
+  }
+
+  .pageContainer {
+    grid-column: 2; /* Occupy the second column */
+    grid-row: 2; /* Occupy the second row */
+    position: relative;
+  }
+
+  @media screen and (max-width: consts.$mobile-width) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 4rem 4rem 1fr;
+
+    .header {
+      grid-row: 1; /* Occupy the first row */
+    }
+    
+    .navbar {
+      grid-row: 2; /* Occupy the second row */
+    }
+  
+    .pageContainer {
+      grid-row: 3; /* Occupy the third row */
+      grid-column: 1; /* Occupy the first column */
+    }
+  }
+}
+
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 500;
+}
+
+input, select {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  margin: 0.5rem 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+// input[type=submit] {
+//   width: 100%;
+//   background-color: #4CAF50;
+//   color: white;
+//   padding: 14px 20px;
+//   margin: 8px 0;
+//   border: none;
+//   border-radius: 4px;
+//   cursor: pointer;
+// }
+
+// input[type=submit]:hover {
+//   background-color: #45a049;
+// }
+
+// td{
+//   background-color: #45a049;
+// }
+// th{
+//   background-color: #45a049;
+// }
+
+//bootstrap override
+
+.form-control {
+  // border-color: var(--background-secondary) !important;
+  // &:checked{
+  //     background-color: var(--background-secondary) !important;
+  //     border-color: var(--background-secondary) !important;
+  
+  // }
+  &:focus {
+      box-shadow: none !important;
+      border-color: var(--background-secondary) !important;
+  }
+}

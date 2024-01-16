@@ -1,0 +1,53 @@
+@use "../../assets/consts";
+
+.loginButtonContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // gap: 0.5rem;
+    color: var(--primary-text-color);
+
+    .error {
+        color: var(--error);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        line-height: 0.5;
+        // padding: 0.25rem;
+    }
+
+    .loginButton {
+        font-size: 2rem;
+        font-weight: 500;
+        background: var(--background-secondary);
+        color: var(--secondary-text-color);
+        padding: 0.5rem 2rem;
+        border-radius: 0.5rem;
+        min-width: 15rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+            scale: 1.05;
+        }
+
+        &:disabled {
+            background: var(--disabled-primary);
+            // color: var(--white-secondary);
+            cursor: wait;
+            &:hover {
+                scale: 1;
+            }
+        }
+    }
+
+    @media screen and (max-width: consts.$mobile-width) {
+        justify-content: start;
+        padding-top: 2rem;
+    }
+}

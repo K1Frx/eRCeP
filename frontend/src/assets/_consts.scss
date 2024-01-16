@@ -1,0 +1,48 @@
+$mobile-width: 720px;
+
+:root {
+    --navbar-width: 15rem;
+    --width: calc(100% - var(--navbar-width));
+    --background-primary: #fff;
+    --background-secondary: #c99789;
+    --mobile-menu-color: rgba(224, 168, 153, 0.9);
+    ;
+    --navbar-hover: #242424;
+
+    --primary-text-color: #000;
+    --secondary-text-color: #fff;
+    --table-header: rgba(224, 168, 153, 0.7);
+    --table-row-hover: #ffe9dc;
+    --loader: #c99789;
+    
+    --disabled-primary: #333333;
+    --error: #e00000;
+    --error-rgb: 224, 0, 0;
+}
+
+html[data-theme="light"] {
+    --background-primary: #fff;
+    --background-secondary: #c99789;
+    --mobile-menu-color: rgba(224, 168, 153, 0.9);
+    --navbar-hover: #242424;
+
+    --primary-text-color: #000;
+    --secondary-text-color: #fff;
+    --table-header: rgba(224, 168, 153, 0.7);
+    --table-row-hover: #ffe9dc;
+    --loader: #c99789;
+}
+
+//dark theme
+html[data-theme="dark"] {
+    --background-primary: #353535;
+    --background-secondary: #181717;
+    --mobile-menu-color: rgba(66, 66, 66, 0.9);
+    --navbar-hover: #242424;
+
+    --primary-text-color: #fff;
+    --secondary-text-color: #fff;
+    --table-header: rgba(66, 66, 66, 0.7);
+    --table-row-hover: #999999;
+    --loader: #242424;
+}
